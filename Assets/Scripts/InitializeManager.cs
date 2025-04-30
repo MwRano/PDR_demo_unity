@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class InitializeManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class InitializeManager : MonoBehaviour
 
     Vector3 initPosition;
     Vector3 initHeading;
+    float pressure;
 
     struct PlayerInfo
     {
@@ -67,6 +69,8 @@ public class InitializeManager : MonoBehaviour
         }
 
         UpdateFloorMaps();
+
+        pressure = PressureSensor.current.atmosphericPressure.ReadValue();
     }
 
     /// <summary>
