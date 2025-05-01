@@ -1,16 +1,28 @@
+# nullable enable
 using UnityEngine;
 
+/// <summary>
+/// userを管理するクラス
+/// </summary>
 public class User : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Transform _userTransform;
+
+    void OnAwake()
     {
-        
+        _userTransform = gameObject.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Move(Vector3 deltaPosition)
     {
-        
+        _userTransform.position += deltaPosition; // 移動量を加算
+        Debug.Log("Move");
     }
+
+    void Rotate(Quaternion deltaRotation)
+    {
+        _userTransform.rotation *= deltaRotation; // ユーザーの回転を更新
+        Debug.Log("Rotate");
+    }
+
 }
