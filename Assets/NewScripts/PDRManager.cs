@@ -14,8 +14,8 @@ public class PDRManager : MonoBehaviour
     private Vector3 _lastAcceleration;
     private Vector3 _position;
 
-    event Action<Vector3>? OnPositionUpdated;
-    event Action<float>? OnRotationUpdated;
+    public event Action<Vector3>? OnPositionUpdated;
+    public event Action<float>? OnRotationUpdated;
 
     void Start()
     {
