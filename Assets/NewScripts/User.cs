@@ -6,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public class User : MonoBehaviour
 {
+    [SerializeField] PDRManager pdrManager;
     private Transform _userTransform;
 
     void OnAwake()
@@ -13,16 +14,14 @@ public class User : MonoBehaviour
         _userTransform = gameObject.transform;
     }
 
-    void Move(Vector3 deltaPosition)
+    void UpdateUserPosition(Vector3 position)
     {
-        _userTransform.position += deltaPosition; // 移動量を加算
-        Debug.Log("Move");
+        _userTransform.position = position; 
     }
 
-    void Rotate(Quaternion deltaRotation)
+    void UpdateUserRotation(float cumulativeYaw)
     {
-        _userTransform.rotation *= deltaRotation; // ユーザーの回転を更新
-        Debug.Log("Rotate");
+        _userTransform.rotation = Quaternion.Euler(0, 0, cumulativeYaw * Mathf.Rad2Deg - 90); // 回転量を計算
     }
 
 }
