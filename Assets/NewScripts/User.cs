@@ -12,6 +12,8 @@ public class User : MonoBehaviour
     void OnAwake()
     {
         _userTransform = gameObject.transform;
+        pdrManager.OnPositionUpdated += UpdateUserPosition;
+        pdrManager.OnRotationUpdated += UpdateUserRotation;
     }
 
     void UpdateUserPosition(Vector3 position)
