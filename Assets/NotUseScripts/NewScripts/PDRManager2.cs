@@ -3,7 +3,7 @@
 using UnityEngine;
 using System;
 
-public class PDRManager : MonoBehaviour
+public class PDRManager2 : MonoBehaviour
 {
     // パラメータ
     private float _stepLength = 0.1f;
