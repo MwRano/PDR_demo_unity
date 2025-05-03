@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class PDRManager : MonoBehaviour
 {
-    [Header("PDR Parameters")]
-    [SerializeField] float stepLength = 0.1f; // ステップの長さ
-    [SerializeField] float stepThreshold = 0.2f; // ステップ検出の閾値（加速度の変化量）
-    [SerializeField] float rotationSpeedFactor = 1.0f; // ジャイロの回転速度にかける係数
+    float stepLength = 0.1f; // ステップの長さ
+    float stepThreshold = 0.2f; // ステップ検出の閾値（加速度の変化量）
+    float rotationSpeedFactor = 1.0f; // ジャイロの回転速度にかける係数
 
-    [Header("User")]
-    [SerializeField] UserManager userManager; // ユーザーマネージャーの参照
+    UserManager _userManager; // ユーザーマネージャーの参照
     float _cumulativeYaw; // Z軸回りの累積回転角度
     Vector3 _lastAcceleration;
     Vector3 _userPosition;
 
-    void OnAwake()
+    public PDRManager(UserManager userManager)
     {
+        _userManager = userManager;
         _lastAcceleration = Input.acceleration;
     }
 
@@ -54,12 +53,12 @@ public class PDRManager : MonoBehaviour
     {
         Vector3 forward = new Vector3(Mathf.Cos(_cumulativeYaw), Mathf.Sin(_cumulativeYaw), 0).normalized;
         _userPosition += forward * stepLength;
-        userManager.UpdateUserPosition(_userPosition); // ユーザーマネージャーに位置を更新
+        _userManager.UpdateUserPosition(_userPosition); // ユーザーマネージャーに位置を更新
     }
 
     void UpdateCumulativeYaw()
     {
         _cumulativeYaw += Input.gyro.rotationRate.z * Time.deltaTime * rotationSpeedFactor;
-        userManager.UpdateUserRotation(_cumulativeYaw); // ユーザーマネージャーに回転を更新
+        _userManager.UpdateUserRotation(_cumulativeYaw); // ユーザーマネージャーに回転を更新
     }
 }
