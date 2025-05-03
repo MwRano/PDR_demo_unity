@@ -2287,6 +2287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b0c172cd7faff42b5f801210ea7710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userPositionText: {fileID: 206910833}
+  userRotationText: {fileID: 721051540}
 --- !u!1 &1020443023
 GameObject:
   m_ObjectHideFlags: 0
