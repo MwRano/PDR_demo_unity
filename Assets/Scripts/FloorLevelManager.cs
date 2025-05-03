@@ -5,19 +5,25 @@ using UnityEngine;
 
 public class FloorLevelManager : MonoBehaviour
 {
-    [SerializeField] TMP_Text floorLevelText; // フロアレベルを表示するテキスト
-    [SerializeField] GameObject floorMaps; // フロアマップの親オブジェクト
+    TMP_Text _floorLevelText; // フロアレベルを表示するテキスト
+    GameObject _floorMaps; // フロアマップの親オブジェクト
+
+    public FloorLevelManager(TMP_Text floorLevelText, GameObject floorMaps)
+    {
+        _floorLevelText = floorLevelText;
+        _floorMaps = floorMaps;
+    }
     
     public void UpdateFloorLevelText(int floorLevel)
     {
-        floorLevelText.text = $"Floor Level: {floorLevel}"; // フロアレベルを表示
+        _floorLevelText.text = $"Floor Level: {floorLevel}"; // フロアレベルを表示
     }
 
     public void UpdateFloorLevelMap(int floorLevel)
     {
-        for (int i = 0; i < floorMaps.transform.childCount; i++)
+        for (int i = 0; i < _floorMaps.transform.childCount; i++)
         {
-            Transform child = floorMaps.transform.GetChild(i);
+            Transform child = _floorMaps.transform.GetChild(i);
             child.gameObject.SetActive(false); // すべてのフロアマップを非表示にする 
 
             string floorTag = $"FLOOR{floorLevel}";
