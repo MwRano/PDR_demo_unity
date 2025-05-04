@@ -19,6 +19,15 @@ public class PositionInputHandler : MonoBehaviour
         _userPositionConfirmButton.onClick.AddListener(OnConfirmButtonClicked); // ボタンがクリックされたときにUpdateInitialPositionメソッドを呼び出す
     }
 
+    void Update()
+    {
+        // タッチが検出された場合、初期位置を更新
+        if (Input.touchCount > 0 && Input.mousePosition.y < 1780f)
+        {
+            UpdateInitialPosition();
+        }
+    }
+
     void UpdateInitialPosition()
     {
         // タップしたスクリーン座標を取得
@@ -35,7 +44,8 @@ public class PositionInputHandler : MonoBehaviour
     void OnConfirmButtonClicked()
     {
         // ボタンがクリックされたときの処理
-        UpdateInitialPosition(); // 初期位置を更新
         isPositionSet = true; // ユーザーの位置が設定されたことを示すフラグを立てる
+        _userPositionConfirmButton.interactable = false; // ボタンを無効化
+        this.enabled = false; // スクリプトを無効化して、Updateメソッドを停止
     }
 }
