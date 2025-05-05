@@ -1973,7 +1973,7 @@ GameObject:
   - component: {fileID: 863018197}
   - component: {fileID: 863018200}
   m_Layer: 5
-  m_Name: Button
+  m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1995,7 +1995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 413.9, y: 662}
+  m_AnchoredPosition: {x: 413.9, y: 587}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863018197
@@ -2671,7 +2671,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 941}
+  m_AnchoredPosition: {x: 0, y: 850}
   m_SizeDelta: {x: 986.82, y: 317.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1446889863
