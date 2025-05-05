@@ -44,6 +44,9 @@ public class AppController : MonoBehaviour
 
         _floorSelector = gameObject.AddComponent<FloorSelector>();
         _floorSelector.Initialize(floorLevelDropdown, _floorLevelManager); // フロアセレクターの初期化
+
+        userPositionConfirmButton.interactable = false; // 初期位置確認ボタンを無効化
+        userDirectionSetButton.interactable = false; // 初期向き設定ボタンを無効化
         
     }
 
@@ -51,17 +54,23 @@ public class AppController : MonoBehaviour
     {
         // 初期フロアの設定が完了したら、初期位置設定ハンドラーを起動
         if(_positionInputHandler is null && _floorSelector.isFloorLevelSet){
+            userPositionConfirmButton.interactable = true;
             _positionInputHandler = gameObject.AddComponent<PositionInputHandler>(); // 位置入力ハンドラーのインスタンスを作成
             _positionInputHandler.Initialize(_userManager, userPositionConfirmButton); // 位置入力ハンドラーの初期化
         }
         // 初期位置の設定が完了したら、初期向き設定ハンドラーを起動
         else if(_directionInputHandler is null && _positionInputHandler is not null &&_positionInputHandler.isPositionSet){
+            userDirectionSetButton.interactable = true;
             Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
             _directionInputHandler = gameObject.AddComponent<DirectionInputHandler>(); // 方向入力ハンドラーのインスタンスを作成
             _directionInputHandler.Initialize(_userManager, userDirectionSetButton, userPosition); // 方向入力ハンドラーの初期化
         }
         // 初期向きの設定が完了したら、PDRマネージャーとフロアレベル推定器を起動
         else if(_pdrManager is null && _floorLevelEstimator is null && _directionInputHandler is not null && _directionInputHandler.isDirectionSet){
+            
+            floorLevelDropdown.interactable = false; // フロアレベル選択ドロップダウンを無効化
+
+
             float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
             Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
             _pdrManager = gameObject.AddComponent<PDRManager>(); // PDRマネージャーのインスタンスを作成
