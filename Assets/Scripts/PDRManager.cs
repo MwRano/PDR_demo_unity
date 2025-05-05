@@ -59,6 +59,6 @@ public class PDRManager : MonoBehaviour
     void UpdateCumulativeYaw()
     {
         _cumulativeYaw += Input.gyro.rotationRate.z * Time.deltaTime * rotationSpeedFactor;
-        _userManager.UpdateUserRotation(_cumulativeYaw); // ユーザーマネージャーに回転を更新
+        _userManager.UpdateUserDirection(_cumulativeYaw); // ユーザーマネージャーに回転を更新
     }
 }
