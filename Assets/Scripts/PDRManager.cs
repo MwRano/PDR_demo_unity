@@ -1,6 +1,7 @@
 # nullable enable
 
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class PDRManager : MonoBehaviour
@@ -14,9 +15,10 @@ public class PDRManager : MonoBehaviour
     Vector3 _lastAcceleration;
     Vector3 _userPosition;
 
-    public PDRManager(UserManager userManager)
+    public PDRManager(UserManager userManager, float userDirectionYaw)
     {
         _userManager = userManager;
+        _cumulativeYaw = userDirectionYaw; // 初期向きを設定
         _lastAcceleration = Input.acceleration;
     }
 
