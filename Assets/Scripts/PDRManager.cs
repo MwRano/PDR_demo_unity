@@ -17,6 +17,7 @@ public class PDRManager : MonoBehaviour
 
     public void Initialize(UserManager userManager, float userDirectionYaw)
     {
+        Input.gyro.enabled = true;
         _userManager = userManager;
         _cumulativeYaw = userDirectionYaw; // 初期向きを設定
         _lastAcceleration = Input.acceleration;
@@ -61,6 +62,7 @@ public class PDRManager : MonoBehaviour
     void UpdateCumulativeYaw()
     {
         _cumulativeYaw += Input.gyro.rotationRate.z * Time.deltaTime * rotationSpeedFactor;
+        Debug.Log($"Input.gyro.rotationRate.z: {Input.gyro.rotationRate.z}"); // デバッグ用ログ
         _userManager.UpdateUserDirection(_cumulativeYaw); // ユーザーマネージャーに回転を更新
     }
 }
