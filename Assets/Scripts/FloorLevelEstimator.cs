@@ -10,15 +10,16 @@ using UnityEngine.InputSystem;
 public class FloorLevelEstimator : MonoBehaviour
 {
     FloorLevelManager _floorLevelManager; // フロアレベルマネージャーの参照
-    private float _pressureThreshold = 1000f;
+    private float _pressureThreshold;
     private int _currentFloorLevel;
     private float _currentFloorPressure;
 
-    public void Initialize(FloorLevelManager floorLevelManager, int floorLevel, float floorPressure)  
+    public void Initialize(FloorLevelManager floorLevelManager, int floorLevel, float floorPressure, FloorEstimationParameters floorEstimationParameters)  
     {
         _floorLevelManager = floorLevelManager;
         _currentFloorLevel = floorLevel;
         _currentFloorPressure = floorPressure; 
+        _pressureThreshold = floorEstimationParameters.floorLevelPressureThreshold;
     }
 
 

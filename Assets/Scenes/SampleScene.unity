@@ -1800,6 +1800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa6ce2f3d8c0674c8ae1a386a310694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pdrParameters: {fileID: 11400000, guid: 1a4a21e803b18c04c8520ef82c7b342e, type: 2}
+  floorEstimationParameters: {fileID: 11400000, guid: c09abc6d1ec229647b023c0a14e40276, type: 2}
   floorLevelDropdown: {fileID: 1482916121}
   userPositionConfirmButton: {fileID: 323908260}
   userDirectionSetButton: {fileID: 1818694733}

@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class AppController : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] PDRParameters pdrParameters; // PDRのパラメータ
+    [SerializeField] FloorEstimationParameters floorEstimationParameters; // フロア推定のパラメータ
 
     [Header("Floor Selector")]
     [SerializeField] TMP_Dropdown floorLevelDropdown; // フロアレベル選択用のドロップダウン
@@ -74,12 +77,12 @@ public class AppController : MonoBehaviour
             float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
             Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
             _pdrManager = gameObject.AddComponent<PDRManager>(); // PDRマネージャーのインスタンスを作成
-            _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition); // PDRマネージャーの初期化
+            _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParameters); // PDRマネージャーの初期化
 
             int floorLevel = _floorSelector.selectedFloorLevel; // 選択されたフロアレベルを取得
             float floorLevelPressure = _floorSelector.selectedFloorLevelPressure; // 選択されたフロアレベルの気圧を取得
             _floorLevelEstimator = gameObject.AddComponent<FloorLevelEstimator>(); // フロアレベル推定器のインスタンスを作成
-            _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure); // フロアレベル推定器の初期化
+            _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure, floorEstimationParameters); // フロアレベル推定器の初期化
         }
     }
 }

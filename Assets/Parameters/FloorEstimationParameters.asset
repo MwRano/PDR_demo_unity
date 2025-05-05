@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f1b96ec414a20840bb1bc8781fc3703, type: 3}
-  m_Name: Navigation Bar
+  m_Script: {fileID: 11500000, guid: bafddc7c7035a3a47bc8f99ca828a113, type: 3}
+  m_Name: FloorEstimationParameters
   m_EditorClassIdentifier: 
-  HideStatusBar: 0
-  style: 0
+  floorLevelPressureThreshold: 1000
