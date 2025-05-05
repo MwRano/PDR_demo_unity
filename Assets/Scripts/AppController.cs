@@ -56,7 +56,7 @@ public class AppController : MonoBehaviour
         }
         // 初期位置の設定が完了したら、初期向き設定ハンドラーを起動
         else if(_directionInputHandler is null && _positionInputHandler is not null &&_positionInputHandler.isPositionSet){
-            Vector3 userPosition = _positionInputHandler.userPostion; // ユーザーの位置を取得
+            Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
             _directionInputHandler = gameObject.AddComponent<DirectionInputHandler>(); // 方向入力ハンドラーのインスタンスを作成
             _directionInputHandler.Initialize(_userManager, userDirectionSetButton, userPosition); // 方向入力ハンドラーの初期化
         }

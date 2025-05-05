@@ -4,12 +4,16 @@ using UnityEngine.UI;
 
 public class PositionInputHandler : MonoBehaviour
 {
-    public Vector3 userPostion{ get; set; } // ユーザーの位置
+    public Vector3 userPosition{ get; set; } // ユーザーの位置
     public bool isPositionSet{ get; set;} // ユーザーの位置が設定されたかどうか
 
     UserManager _userManager; // ユーザーマネージャーの参照
     Button _userPositionConfirmButton; // ボタンの参照
- 
+
+    Vector2 _touchStartPosition; // タッチ開始位置
+    Vector2 _userStartPosition; // ユーザーの初期位置
+    float _swipeSpeed = 0.001f; // スワイプの速度
+
     public void Initialize(UserManager userManager, Button userPositionConfirmButton)
     {
         isPositionSet = false; // 初期値を設定
@@ -27,18 +31,38 @@ public class PositionInputHandler : MonoBehaviour
         }
     }
 
+    // void UpdateInitialPosition()
+    // {
+    //     Vector3 screenPosition = Input.mousePosition;
+    //     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, Camera.main.nearClipPlane));
+    //     worldPosition.z = 0;
+
+
+
+    //     userPostion = worldPosition; // ユーザーの位置を更新
+    //     _userManager.UpdateUserPosition(userPostion); // ユーザーマネージャーに位置を更新
+    // }
+
     void UpdateInitialPosition()
     {
-        // タップしたスクリーン座標を取得
-        Vector3 screenPosition = Input.mousePosition;
 
-        // スクリーン座標をワールド座標に変換
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, Camera.main.nearClipPlane));
-        worldPosition.z = 0;
+        if (Input.GetMouseButtonDown(0)){
+            _touchStartPosition = Input.mousePosition; // タッチ開始位置を取得
+            _userStartPosition = userPosition; // ユーザーの初期位置を取得
+        }
 
-        userPostion = worldPosition; // ユーザーの位置を更新
-        _userManager.UpdateUserPosition(userPostion); // ユーザーマネージャーに位置を更新
+        if(Input.GetMouseButton(0)){
+            Vector2 touchCurrentPosition = Input.mousePosition; // タッチ現在位置を取得
+            Vector2 touchDelta = touchCurrentPosition - _touchStartPosition; // タッチの移動量を計算
+            Vector2 moveDirection = new Vector2(-touchDelta.x, -touchDelta.y) * _swipeSpeed; // 移動方向を計算
+
+            userPosition = _userStartPosition + moveDirection; // ユーザーの位置を更新  
+            _userManager.UpdateUserPosition(userPosition);
+
+        }
+
     }
+
 
     void OnConfirmButtonClicked()
     {
