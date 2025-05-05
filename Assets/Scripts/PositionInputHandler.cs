@@ -12,7 +12,7 @@ public class PositionInputHandler : MonoBehaviour
 
     Vector2 _touchStartPosition; // タッチ開始位置
     Vector2 _userStartPosition; // ユーザーの初期位置
-    float _swipeSpeed = 0.001f; // スワイプの速度
+    float _swipeSpeed = 0.01f; // スワイプの速度
 
     public void Initialize(UserManager userManager, Button userPositionConfirmButton)
     {

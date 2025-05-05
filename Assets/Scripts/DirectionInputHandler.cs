@@ -25,7 +25,7 @@ public class DirectionInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0 && Input.mousePosition.y < 1780f)
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.y < 1780f)
         {
             UpdateInitialDirection();
         }
