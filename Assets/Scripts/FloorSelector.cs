@@ -7,13 +7,14 @@ public class FloorSelector : MonoBehaviour
     // AppControllerからこれらの変数とる
     public float selectedFloorLevelPressure{get; set;} // 選択されたフロアレベルの気圧;
     public int selectedFloorLevel{get; set;} // 選択されたフロアレベル
-    public bool isFloorLevelSet{get; set;} // フロアレベルが設定されたかどうか
+    public bool isFloorLevelSet{get; set;}// フロアレベルが設定されたかどうか
 
     TMP_Dropdown _floorLevelDropdown;
     FloorLevelManager _floorLevelManager;
 
     public void Initialize(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
     {
+        isFloorLevelSet = false; // 初期値を設定
         _floorLevelDropdown = floorLevelDropdown;
         _floorLevelManager = floorLevelManager;
 
@@ -22,6 +23,7 @@ public class FloorSelector : MonoBehaviour
 
     void OnFloorSelected(int floorIndex)
     {
+        isFloorLevelSet = true; // フロアレベルが設定されたことを示すフラグを立てる
         // ドロップダウンの選択されたフロアレベルを取得
         selectedFloorLevel = floorIndex + 6; // 0から始まるインデックスを6から始まるフロアレベルに変換
         UpdateSelectedFloorLevelPressure();
@@ -32,6 +34,7 @@ public class FloorSelector : MonoBehaviour
 
     void UpdateSelectedFloorLevelPressure()
     {
-        selectedFloorLevelPressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        selectedFloorLevelPressure = 1000f;
+        //selectedFloorLevelPressure = PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }

@@ -46,6 +46,7 @@ public class FloorLevelEstimator : MonoBehaviour
 
     float ReadPressureSensorValue()
     {
-        return PressureSensor.current.atmosphericPressure.ReadValue();
+        return 1000f; // 仮の値を返す。実際にはセンサーからの値を取得する必要がある。
+        //return PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }

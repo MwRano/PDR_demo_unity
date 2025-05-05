@@ -2,7 +2,7 @@
 
 using UnityEngine;
 using TMPro; 
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class AppController : MonoBehaviour
 {
@@ -55,13 +55,13 @@ public class AppController : MonoBehaviour
             _positionInputHandler.Initialize(_userManager, userPositionConfirmButton); // 位置入力ハンドラーの初期化
         }
         // 初期位置の設定が完了したら、初期向き設定ハンドラーを起動
-        else if(_directionInputHandler is null && _positionInputHandler.isPositionSet){
+        else if(_directionInputHandler is null && _positionInputHandler is not null &&_positionInputHandler.isPositionSet){
             Vector3 userPosition = _positionInputHandler.userPostion; // ユーザーの位置を取得
             _directionInputHandler = gameObject.AddComponent<DirectionInputHandler>(); // 方向入力ハンドラーのインスタンスを作成
             _directionInputHandler.Initialize(_userManager, userDirectionSetButton, userPosition); // 方向入力ハンドラーの初期化
         }
         // 初期向きの設定が完了したら、PDRマネージャーとフロアレベル推定器を起動
-        else if(_pdrManager is null && _floorLevelEstimator is null && _directionInputHandler.isDirectionSet){
+        else if(_pdrManager is null && _floorLevelEstimator is null && _directionInputHandler is not null && _directionInputHandler.isDirectionSet){
             float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
             _pdrManager = gameObject.AddComponent<PDRManager>(); // PDRマネージャーのインスタンスを作成
             _pdrManager.Initialize(_userManager, userDirectionYaw); // PDRマネージャーの初期化
