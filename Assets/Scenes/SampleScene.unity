@@ -1157,8 +1157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944cfbfe6a2509e4b823aafe75f8bacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorLevelText: {fileID: 1297235710}
-  floorMaps: {fileID: 112438906}
 --- !u!4 &476695787
 Transform:
   m_ObjectHideFlags: 0
@@ -1843,6 +1841,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721051538}
   m_CullTransparentMesh: 1
+--- !u!1 &796991825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 796991827}
+  - component: {fileID: 796991826}
+  m_Layer: 0
+  m_Name: AppController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &796991826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796991825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa6ce2f3d8c0674c8ae1a386a310694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorLevelDropdown: {fileID: 1482916121}
+  userPositionConfirmButton: {fileID: 323908260}
+  userDirectionSetButton: {fileID: 1818694733}
+  userTransform: {fileID: 939166044}
+  userPositionText: {fileID: 206910833}
+  userRotationText: {fileID: 721051540}
+  floorLevelText: {fileID: 1464303684}
+  floorMaps: {fileID: 112438906}
+--- !u!4 &796991827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796991825}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 704.71747, y: 2037.8143, z: -3.5540588}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &809434476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,8 +2384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b0c172cd7faff42b5f801210ea7710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userPositionText: {fileID: 206910833}
-  userRotationText: {fileID: 721051540}
 --- !u!1 &1020443023
 GameObject:
   m_ObjectHideFlags: 0
@@ -3582,10 +3630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a1396bf2a06d34995ea18f5d4e3fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepLength: 0.1
-  stepThreshold: 0.2
-  rotationSpeedFactor: 1
-  userManager: {fileID: 939166045}
 --- !u!4 &1679130271
 Transform:
   m_ObjectHideFlags: 0
@@ -4355,3 +4399,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1679130271}
   - {fileID: 476695787}
+  - {fileID: 796991827}

@@ -7,6 +7,7 @@ public class FloorSelector : MonoBehaviour
     // AppControllerからこれらの変数とる
     public float selectedFloorLevelPressure{get; set;} // 選択されたフロアレベルの気圧;
     public int selectedFloorLevel{get; set;} // 選択されたフロアレベル
+    public bool isFloorLevelSet{get; set;} // フロアレベルが設定されたかどうか
 
     TMP_Dropdown _floorLevelDropdown;
     FloorLevelManager _floorLevelManager;
