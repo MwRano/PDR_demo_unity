@@ -12,8 +12,7 @@ public class UserManager : MonoBehaviour
     TMP_Text _userRotationText; // ユーザーの向きを表示するテキスト
     Transform _userTransform;
 
-
-    public UserManager(Transform userTransform, TMP_Text positionText, TMP_Text rotationText)
+    public void Initialize(Transform userTransform, TMP_Text positionText, TMP_Text rotationText)
     {
         _userTransform = userTransform;
         _userPositionText = positionText;

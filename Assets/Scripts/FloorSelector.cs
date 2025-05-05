@@ -12,12 +12,12 @@ public class FloorSelector : MonoBehaviour
     TMP_Dropdown _floorLevelDropdown;
     FloorLevelManager _floorLevelManager;
 
-    public FloorSelector(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
+    public void Initialize(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
     {
         _floorLevelDropdown = floorLevelDropdown;
         _floorLevelManager = floorLevelManager;
 
-        _floorLevelDropdown.onValueChanged.AddListener(OnFloorSelected); // ドロップダウンの選択変更イベントにメソッドを登録
+        _floorLevelDropdown.onValueChanged.AddListener(OnFloorSelected);
     }
 
     void OnFloorSelected(int floorIndex)

@@ -1,4 +1,4 @@
-#nullable enable
+
 
 using UnityEngine;
 using TMPro; 
@@ -34,10 +34,16 @@ public class AppController : MonoBehaviour
     FloorLevelEstimator _floorLevelEstimator; // フロアレベル推定器のインスタンス
 
 
-    void OnAwake(){
-        _userManager = new UserManager(userTransform, userPositionText, userRotationText);
-        _floorLevelManager = new FloorLevelManager(floorLevelText, floorMaps); // フロアレベルマネージャーのインスタンスを作成
-        _floorSelector = new FloorSelector(floorLevelDropdown, _floorLevelManager); // フロアセレクターのインスタンスを作成
+    void Start()
+    {
+        _userManager = gameObject.AddComponent<UserManager>();
+        _userManager.Initialize(userTransform, userPositionText, userRotationText); // ユーザーマネージャーの初期化
+
+        _floorLevelManager = gameObject.AddComponent<FloorLevelManager>();
+        _floorLevelManager.Initialize(floorLevelText, floorMaps); // フロアレベルマネージャーの初期化
+
+        _floorSelector = gameObject.AddComponent<FloorSelector>();
+        _floorSelector.Initialize(floorLevelDropdown, _floorLevelManager); // フロアセレクターの初期化
         
     }
 
@@ -45,21 +51,25 @@ public class AppController : MonoBehaviour
     {
         // 初期フロアの設定が完了したら、初期位置設定ハンドラーを起動
         if(_positionInputHandler is null && _floorSelector.isFloorLevelSet){
-            _positionInputHandler = new PositionInputHandler(_userManager, userPositionConfirmButton); 
+            _positionInputHandler = gameObject.AddComponent<PositionInputHandler>(); // 位置入力ハンドラーのインスタンスを作成
+            _positionInputHandler.Initialize(_userManager, userPositionConfirmButton); // 位置入力ハンドラーの初期化
         }
         // 初期位置の設定が完了したら、初期向き設定ハンドラーを起動
         else if(_directionInputHandler is null && _positionInputHandler.isPositionSet){
             Vector3 userPosition = _positionInputHandler.userPostion; // ユーザーの位置を取得
-            _directionInputHandler = new DirectionInputHandler(_userManager, userDirectionSetButton, userPosition);
+            _directionInputHandler = gameObject.AddComponent<DirectionInputHandler>(); // 方向入力ハンドラーのインスタンスを作成
+            _directionInputHandler.Initialize(_userManager, userDirectionSetButton, userPosition); // 方向入力ハンドラーの初期化
         }
         // 初期向きの設定が完了したら、PDRマネージャーとフロアレベル推定器を起動
         else if(_pdrManager is null && _floorLevelEstimator is null && _directionInputHandler.isDirectionSet){
             float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
-            _pdrManager = new PDRManager(_userManager, userDirectionYaw); // PDRマネージャーのインスタンスを作成
+            _pdrManager = gameObject.AddComponent<PDRManager>(); // PDRマネージャーのインスタンスを作成
+            _pdrManager.Initialize(_userManager, userDirectionYaw); // PDRマネージャーの初期化
 
             int floorLevel = _floorSelector.selectedFloorLevel; // 選択されたフロアレベルを取得
             float floorLevelPressure = _floorSelector.selectedFloorLevelPressure; // 選択されたフロアレベルの気圧を取得
-            _floorLevelEstimator = new FloorLevelEstimator(_floorLevelManager, floorLevel, floorLevelPressure); // フロアレベル推定器のインスタンスを作成
+            _floorLevelEstimator = gameObject.AddComponent<FloorLevelEstimator>(); // フロアレベル推定器のインスタンスを作成
+            _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure); // フロアレベル推定器の初期化
         }
     }
 }

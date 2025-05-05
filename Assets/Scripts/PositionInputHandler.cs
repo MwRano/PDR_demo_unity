@@ -10,8 +10,7 @@ public class PositionInputHandler : MonoBehaviour
     UserManager _userManager; // ユーザーマネージャーの参照
     Button _userPositionConfirmButton; // ボタンの参照
  
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public PositionInputHandler(UserManager userManager, Button userPositionConfirmButton)
+    public void Initialize(UserManager userManager, Button userPositionConfirmButton)
     {
         isPositionSet = false; // 初期値を設定
         _userManager = userManager;
