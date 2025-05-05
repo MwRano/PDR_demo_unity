@@ -63,8 +63,9 @@ public class AppController : MonoBehaviour
         // 初期向きの設定が完了したら、PDRマネージャーとフロアレベル推定器を起動
         else if(_pdrManager is null && _floorLevelEstimator is null && _directionInputHandler is not null && _directionInputHandler.isDirectionSet){
             float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
+            Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
             _pdrManager = gameObject.AddComponent<PDRManager>(); // PDRマネージャーのインスタンスを作成
-            _pdrManager.Initialize(_userManager, userDirectionYaw); // PDRマネージャーの初期化
+            _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition); // PDRマネージャーの初期化
 
             int floorLevel = _floorSelector.selectedFloorLevel; // 選択されたフロアレベルを取得
             float floorLevelPressure = _floorSelector.selectedFloorLevelPressure; // 選択されたフロアレベルの気圧を取得

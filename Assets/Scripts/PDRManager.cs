@@ -15,11 +15,12 @@ public class PDRManager : MonoBehaviour
     Vector3 _lastAcceleration;
     Vector3 _userPosition;
 
-    public void Initialize(UserManager userManager, float userDirectionYaw)
+    public void Initialize(UserManager userManager, float userDirectionYaw, Vector3 userPosition)
     {
         Input.gyro.enabled = true;
         _userManager = userManager;
         _cumulativeYaw = userDirectionYaw; // 初期向きを設定
+        _userPosition = userPosition; // ユーザーの初期位置を設定
         _lastAcceleration = Input.acceleration;
     }
 
