@@ -8,7 +8,7 @@ public class FloorLevelManager : MonoBehaviour
     TMP_Text _floorLevelText; // フロアレベルを表示するテキスト
     GameObject _floorMaps; // フロアマップの親オブジェクト
 
-    public FloorLevelManager(TMP_Text floorLevelText, GameObject floorMaps)
+    public void Initialize(TMP_Text floorLevelText, GameObject floorMaps)
     {
         _floorLevelText = floorLevelText;
         _floorMaps = floorMaps;

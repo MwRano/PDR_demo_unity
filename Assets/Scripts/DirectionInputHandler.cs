@@ -13,7 +13,7 @@ public class DirectionInputHandler : MonoBehaviour
     Button _userDirectionConfirmButton; // ボタンの参照
     Vector3 _userPosition;
 
-    public DirectionInputHandler(UserManager userManager, Button userDirectionConfirmButton, Vector3 userPosition)
+    public void Initialize(UserManager userManager, Button userDirectionConfirmButton, Vector3 userPosition)
     {
         isDirectionSet = false; // 初期値を設定
         _userManager = userManager;
