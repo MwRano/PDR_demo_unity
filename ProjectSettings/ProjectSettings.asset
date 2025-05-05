@@ -67,7 +67,7 @@ PlayerSettings:
   use32BitDisplayBuffer: 1
   preserveFramebufferAlpha: 0
   disableDepthAndStencilBuffers: 0
-  androidStartInFullscreen: 1
+  androidStartInFullscreen: 0
   androidRenderOutsideSafeArea: 1
   androidUseSwappy: 1
   androidBlitType: 2
@@ -143,6 +143,7 @@ PlayerSettings:
   bundleVersion: 1.0.2
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  - {fileID: 11400000, guid: 36ab87ca1dac6aa40a896376986b1330, type: 2}
   - {fileID: -848603050954965377, guid: 5ce3daaf004e74f279760c6826deeafe, type: 2}
   - {fileID: 11400000, guid: a878a6deb9a514af68fc5d51d2a1ee04, type: 2}
   metroInputSource: 0
@@ -205,7 +206,7 @@ PlayerSettings:
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
-  uIStatusBarHidden: 1
+  uIStatusBarHidden: 0
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
   appleTVSplashScreen: {fileID: 0}
