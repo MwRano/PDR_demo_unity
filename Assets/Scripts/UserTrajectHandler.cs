@@ -6,7 +6,6 @@ public class UserTrajectHandler : MonoBehaviour
 {
     [SerializeField] Toggle userTrajectoryToggle;
     [SerializeField] UserManager userManager; 
-    [SerializeField] Material lineRendererMaterial; 
 
     void Start()
     {
