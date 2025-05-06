@@ -2391,7 +2391,7 @@ GameObject:
   - component: {fileID: 939166043}
   - component: {fileID: 939166045}
   m_Layer: 0
-  m_Name: Player
+  m_Name: User
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4083,8 +4083,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 619394802}
   - {fileID: 1087499985}
-  - {fileID: 470734757}
   - {fileID: 939166044}
   - {fileID: 428595118}
   - {fileID: 112438907}
   - {fileID: 796991827}
+  - {fileID: 470734757}
