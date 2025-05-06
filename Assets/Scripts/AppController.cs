@@ -28,6 +28,9 @@ public class AppController : MonoBehaviour
     [SerializeField] TMP_Text floorLevelText; // フロアレベルを表示するテキスト
     [SerializeField] GameObject floorMaps; // フロアマップの親オブジェクト
 
+    [Header("User Trajectory")]
+    [SerializeField] Toggle userTrajectoryToggle; // ユーザーの軌跡を表示するトグル
+
     UserManager _userManager; 
     FloorLevelManager _floorLevelManager;
     FloorSelector _floorSelector; // フロアセレクターのインスタンス
@@ -50,6 +53,8 @@ public class AppController : MonoBehaviour
 
         userPositionConfirmButton.interactable = false; // 初期位置確認ボタンを無効化
         userDirectionSetButton.interactable = false; // 初期向き設定ボタンを無効化
+
+        userTrajectoryToggle.gameObject.SetActive(false); // ユーザーの軌跡トグルを非表示
         
     }
 
@@ -73,6 +78,7 @@ public class AppController : MonoBehaviour
             
             floorLevelDropdown.interactable = false; // フロアレベル選択ドロップダウンを無効化
 
+            userTrajectoryToggle.gameObject.SetActive(true); // ユーザーの軌跡トグルを表示
 
             float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
             Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
