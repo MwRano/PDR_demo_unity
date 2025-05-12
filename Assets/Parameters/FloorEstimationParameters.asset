@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafddc7c7035a3a47bc8f99ca828a113, type: 3}
   m_Name: FloorEstimationParameters
   m_EditorClassIdentifier: 
-  floorLevelPressureThreshold: 1000
+  floorLevelPressureThreshold: 0.1
