@@ -41,6 +41,7 @@ public class UserTrajectHandler : MonoBehaviour
         lineRenderer.startColor = Color.red; // 線の色を設定
         lineRenderer.endColor = Color.red; // 線の色を設定
         lineRenderer.positionCount = 0; // 頂点数を初期化
+        lineRenderer.sortingOrder = 1; // 描画順序を設定
         lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // マテリアルを設定
     }
 
