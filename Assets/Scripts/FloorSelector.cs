@@ -19,6 +19,7 @@ public class FloorSelector : MonoBehaviour
         _floorLevelManager = floorLevelManager;
 
         _floorLevelDropdown.onValueChanged.AddListener(OnFloorSelected);
+        InputSystem.EnableDevice(PressureSensor.current);
     }
 
     void OnFloorSelected(int floorIndex)
@@ -34,7 +35,7 @@ public class FloorSelector : MonoBehaviour
 
     void UpdateSelectedFloorLevelPressure()
     {
-        selectedFloorLevelPressure = 1000f;
-        //selectedFloorLevelPressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        //selectedFloorLevelPressure = 1000f;
+        selectedFloorLevelPressure = PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }

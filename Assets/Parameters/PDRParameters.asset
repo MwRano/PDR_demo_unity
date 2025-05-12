@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PDRParameters
   m_EditorClassIdentifier: 
   stepLength: 0.2
-  stepThreshold: 0.01
+  stepThreshold: 0.1
   rotationSpeedFactor: 1
