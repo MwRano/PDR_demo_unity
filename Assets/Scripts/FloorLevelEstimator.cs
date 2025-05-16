@@ -40,7 +40,8 @@ public class FloorLevelEstimator : MonoBehaviour
         // フロアが変更された場合
         if(isFloorChanged) UpdateFloorInfo(pressureDiff, devicePressure);
 
-        
+        // 変数devide pressureの値をデバッグログに出力
+        Debug.Log($"devicePressure: {devicePressure}");
         
     }
 
