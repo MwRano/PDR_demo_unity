@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b52ea56fd5743d4a0c22e23ea8f2b0, type: 3}
   m_Name: FloorMapParam
   m_EditorClassIdentifier: 
+  floorMapScale: 4.869327
   floorMapDataList:
   - floorId: 9
     floorSprite: {fileID: 2409999409478918202, guid: 813d4d5c97d3e244da32f877b2760d03, type: 3}
