@@ -2,22 +2,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UserTrajectHandler : MonoBehaviour
+public class UserTrajectHandler
 {
-    [SerializeField] Toggle userTrajectoryToggle;
-    [SerializeField] UserManager userManager; 
+    private GameObject _userObject;
 
-    void Start()
+    public UserTrajectHandler(Toggle userTrajectoryToggle, GameObject userObject)
     {
         if (userTrajectoryToggle == null)
         {
             Debug.LogError("UserTrajectoryToggle is not assigned in the inspector.");
             return;
         }
-        
-        userTrajectoryToggle.onValueChanged.AddListener(OnToggleChanged);
-        
 
+        userTrajectoryToggle.onValueChanged.AddListener(OnToggleChanged);
+        _userObject = userObject;
     }
 
     
@@ -29,13 +27,14 @@ public class UserTrajectHandler : MonoBehaviour
             return;
         }
 
-        Destroy(userManager.GetComponent<LineRenderer>()); // ユーザーマネージャーからLineRendererを削除
+        GameObject.Destroy(_userObject.GetComponent<LineRenderer>()); // ユーザーマネージャーからLineRendererを削除
         
     }
 
     void InitializeLineRenderer()
     {
-        LineRenderer lineRenderer = userManager.AddComponent<LineRenderer>();
+        Debug.Log("LineRendererをアタッチ");
+        LineRenderer lineRenderer = _userObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.1f; // 線の太さを設定
         lineRenderer.endWidth = 0.1f; // 線の太さを設定
         lineRenderer.startColor = Color.red; // 線の色を設定

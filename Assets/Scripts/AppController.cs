@@ -41,6 +41,7 @@ public class AppController : MonoBehaviour
     [SerializeField] TMP_Text floorLevelText; // フロアレベルを表示するテキスト
 
     [Header("User Trajectory")]
+    [SerializeField] GameObject userObject; 
     [SerializeField] Toggle userTrajectoryToggle; // ユーザーの軌跡を表示するトグル
 
     FloorMapGenerator _floorMapGenerator; // フロアマップの生成クラス
@@ -58,8 +59,10 @@ public class AppController : MonoBehaviour
         _floorMapGenerator = new FloorMapGenerator(floorMapParams);
         GameObject floorMapParent = _floorMapGenerator.GenerateFloorMap();
 
-        _userManager = gameObject.AddComponent<UserManager>();
-        _userManager.Initialize(userTransform, userPositionText, userRotationText); // ユーザーマネージャーの初期化
+        // _userManager = gameObject.AddComponent<UserManager>();
+        // _userManager.Initialize(userTransform, userPositionText, userRotationText); // ユーザーマネージャーの初期化
+
+        _userManager = new UserManager(userTransform, userPositionText, userRotationText);
 
         _floorLevelManager = gameObject.AddComponent<FloorLevelManager>();
         _floorLevelManager.Initialize(floorLevelText, floorMapParent); // フロアレベルマネージャーの初期化
@@ -124,7 +127,8 @@ public class AppController : MonoBehaviour
         if (_directionInputHandler is null || _directionInputHandler.isDirectionSet == false) return;
 
         floorLevelDropdown.interactable = false;
-        userTrajectoryToggle.gameObject.SetActive(true);
+        userTrajectoryToggle.gameObject.SetActive(true); // ユーザーの軌跡トグルを非表示
+        new UserTrajectHandler(userTrajectoryToggle, userObject);
 
         float userDirectionYaw = _directionInputHandler.userDirectionYaw;
         Vector3 userPosition = _positionInputHandler.userPosition;

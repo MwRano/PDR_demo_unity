@@ -1400,7 +1400,6 @@ GameObject:
   m_Component:
   - component: {fileID: 703440734}
   - component: {fileID: 703440735}
-  - component: {fileID: 703440736}
   m_Layer: 5
   m_Name: TrajectoryToggle
   m_TagString: Untagged
@@ -1477,20 +1476,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &703440736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703440733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13f10d86c1191194fb5977872a693fa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userTrajectoryToggle: {fileID: 703440735}
-  userManager: {fileID: 939166045}
 --- !u!1 &715128570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,9 +1677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa6ce2f3d8c0674c8ae1a386a310694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pdrParameters: {fileID: 11400000, guid: 1a4a21e803b18c04c8520ef82c7b342e, type: 2}
-  floorEstimationParameters: {fileID: 11400000, guid: c09abc6d1ec229647b023c0a14e40276, type: 2}
-  floorMapParam: {fileID: 11400000, guid: 2ca924fa5d657459986ce395ef3c189a, type: 2}
+  pdrParams: {fileID: 11400000, guid: 1a4a21e803b18c04c8520ef82c7b342e, type: 2}
+  floorEstimationParams: {fileID: 11400000, guid: c09abc6d1ec229647b023c0a14e40276, type: 2}
+  floorMapParams: {fileID: 11400000, guid: 2ca924fa5d657459986ce395ef3c189a, type: 2}
   floorLevelDropdown: {fileID: 1482916121}
   userPositionConfirmButton: {fileID: 323908260}
   userDirectionSetButton: {fileID: 1818694733}
@@ -1702,6 +1687,7 @@ MonoBehaviour:
   userPositionText: {fileID: 206910833}
   userRotationText: {fileID: 721051540}
   floorLevelText: {fileID: 1464303684}
+  userObject: {fileID: 939166042}
   userTrajectoryToggle: {fileID: 703440735}
 --- !u!4 &796991827
 Transform:
@@ -2180,7 +2166,6 @@ GameObject:
   m_Component:
   - component: {fileID: 939166044}
   - component: {fileID: 939166043}
-  - component: {fileID: 939166045}
   m_Layer: 0
   m_Name: User
   m_TagString: Untagged
@@ -2260,18 +2245,6 @@ Transform:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &939166045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939166042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79b0c172cd7faff42b5f801210ea7710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1020443023
 GameObject:
   m_ObjectHideFlags: 0

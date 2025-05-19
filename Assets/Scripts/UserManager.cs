@@ -6,13 +6,13 @@ using TMPro;
 /// <summary>
 /// ユーザーの状態を管理するクラス
 /// </summary>
-public class UserManager : MonoBehaviour
+public class UserManager
 {
     TMP_Text _userPositionText; // ユーザーの位置を表示するテキスト
     TMP_Text _userRotationText; // ユーザーの向きを表示するテキスト
     Transform _userTransform;
 
-    public void Initialize(Transform userTransform, TMP_Text positionText, TMP_Text rotationText)
+    public UserManager(Transform userTransform, TMP_Text positionText, TMP_Text rotationText)
     {
         _userTransform = userTransform;
         _userPositionText = positionText;
