@@ -18,7 +18,7 @@ public class FloorMapGenerator
     }
 
     // フロアマップを生成するメソッド
-    GameObject GenerateFloorMap()
+    public GameObject GenerateFloorMap()
     {
         GameObject floorMapParent = new GameObject(_floorMapParentName);
 
