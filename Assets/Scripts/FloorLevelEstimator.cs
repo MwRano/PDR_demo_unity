@@ -21,8 +21,16 @@ public class FloorLevelEstimator : MonoBehaviour
         _currentFloorLevel = floorLevel;
         _currentFloorPressure = floorPressure; 
         _pressureThreshold = floorEstimationParameters.floorLevelPressureThreshold;
-        InputSystem.EnableDevice(PressureSensor.current);
         _initFlag = true; // 初期化フラグを立てる
+
+        //  sensorがないときの例外処理
+        if (PressureSensor.current is null)
+        {
+            Debug.LogWarning("気圧センサを有効化しようとしましたが、デバイスの気圧センサを認識できません。");
+            return;
+        }
+        InputSystem.EnableDevice(PressureSensor.current);
+        
     }
 
 
@@ -55,7 +63,13 @@ public class FloorLevelEstimator : MonoBehaviour
 
     float ReadPressureSensorValue()
     {
-        // return 1000f; // 仮の値を返す。実際にはセンサーからの値を取得する必要がある。
+        //  sensorがないときの例外処理
+        if (PressureSensor.current is null)
+        {
+            Debug.LogWarning("気圧センサ値を取得しようとしましたが、デバイスの気圧センサを認識できません。仮のセンサ値を返します");
+            return 1000f;
+        }
+
         return PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }
