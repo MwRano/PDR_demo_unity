@@ -1,4 +1,4 @@
-
+#nullable enable
 
 using UnityEngine;
 using TMPro; 
@@ -6,9 +6,22 @@ using UnityEngine.UI;
 
 public class AppController : MonoBehaviour
 {
+    // アプリの状態を管理する列挙型
+    private enum AppState
+    {
+        FloorSelection,
+        PositionInput,
+        DirectionInput,
+        PDRStarting
+    }
+
+    // 初期状態をフロア選択状態に設定
+    private AppState _appState = AppState.FloorSelection;
+
     [Header("Parameters")]
     [SerializeField] PDRParameters pdrParameters; // PDRのパラメータ
     [SerializeField] FloorEstimationParameters floorEstimationParameters; // フロア推定のパラメータ
+    [SerializeField] FloorMapParam floorMapParam; // フロアマップのパラメータ
 
     [Header("Floor Selector")]
     [SerializeField] TMP_Dropdown floorLevelDropdown; // フロアレベル選択用のドロップダウン
@@ -26,12 +39,12 @@ public class AppController : MonoBehaviour
 
     [Header("Floor Level Manager")]
     [SerializeField] TMP_Text floorLevelText; // フロアレベルを表示するテキスト
-    [SerializeField] GameObject floorMaps; // フロアマップの親オブジェクト
 
     [Header("User Trajectory")]
     [SerializeField] Toggle userTrajectoryToggle; // ユーザーの軌跡を表示するトグル
 
-    UserManager _userManager; 
+    FloorMapGenerator _floorMapGenerator; // フロアマップの生成クラス
+    UserManager _userManager;
     FloorLevelManager _floorLevelManager;
     FloorSelector _floorSelector; // フロアセレクターのインスタンス
     PositionInputHandler _positionInputHandler; // 位置入力ハンドラーのインスタンス
@@ -42,11 +55,14 @@ public class AppController : MonoBehaviour
 
     void Start()
     {
+        _floorMapGenerator = new FloorMapGenerator(floorMapParam.floorMapDataList);
+        GameObject floorMapParent = _floorMapGenerator.GenerateFloorMap();
+
         _userManager = gameObject.AddComponent<UserManager>();
         _userManager.Initialize(userTransform, userPositionText, userRotationText); // ユーザーマネージャーの初期化
 
         _floorLevelManager = gameObject.AddComponent<FloorLevelManager>();
-        _floorLevelManager.Initialize(floorLevelText, floorMaps); // フロアレベルマネージャーの初期化
+        _floorLevelManager.Initialize(floorLevelText, floorMapParent); // フロアレベルマネージャーの初期化
 
         _floorSelector = gameObject.AddComponent<FloorSelector>();
         _floorSelector.Initialize(floorLevelDropdown, _floorLevelManager); // フロアセレクターの初期化
@@ -55,40 +71,79 @@ public class AppController : MonoBehaviour
         userDirectionSetButton.interactable = false; // 初期向き設定ボタンを無効化
 
         userTrajectoryToggle.gameObject.SetActive(false); // ユーザーの軌跡トグルを非表示
-        
+
     }
 
     void Update()
     {
-        // 初期フロアの設定が完了したら、初期位置設定ハンドラーを起動
-        if(_positionInputHandler is null && _floorSelector.isFloorLevelSet){
-            userPositionConfirmButton.interactable = true;
-            _positionInputHandler = gameObject.AddComponent<PositionInputHandler>(); // 位置入力ハンドラーのインスタンスを作成
-            _positionInputHandler.Initialize(_userManager, userPositionConfirmButton); // 位置入力ハンドラーの初期化
-        }
-        // 初期位置の設定が完了したら、初期向き設定ハンドラーを起動
-        else if(_directionInputHandler is null && _positionInputHandler is not null &&_positionInputHandler.isPositionSet){
-            userDirectionSetButton.interactable = true;
-            Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
-            _directionInputHandler = gameObject.AddComponent<DirectionInputHandler>(); // 方向入力ハンドラーのインスタンスを作成
-            _directionInputHandler.Initialize(_userManager, userDirectionSetButton, userPosition); // 方向入力ハンドラーの初期化
-        }
-        // 初期向きの設定が完了したら、PDRマネージャーとフロアレベル推定器を起動
-        else if(_pdrManager is null && _floorLevelEstimator is null && _directionInputHandler is not null && _directionInputHandler.isDirectionSet){
-            
-            floorLevelDropdown.interactable = false; // フロアレベル選択ドロップダウンを無効化
+        switch (_appState)
+        {
+            case AppState.FloorSelection:
+                OnFloorSelected();
+                break;
 
-            userTrajectoryToggle.gameObject.SetActive(true); // ユーザーの軌跡トグルを表示
+            case AppState.PositionInput:
+                OnPositionInput();
+                break;
 
-            float userDirectionYaw = _directionInputHandler.userDirectionYaw; // ユーザーの向きを取得
-            Vector3 userPosition = _positionInputHandler.userPosition; // ユーザーの位置を取得
-            _pdrManager = gameObject.AddComponent<PDRManager>(); // PDRマネージャーのインスタンスを作成
-            _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParameters); // PDRマネージャーの初期化
-
-            int floorLevel = _floorSelector.selectedFloorLevel; // 選択されたフロアレベルを取得
-            float floorLevelPressure = _floorSelector.selectedFloorLevelPressure; // 選択されたフロアレベルの気圧を取得
-            _floorLevelEstimator = gameObject.AddComponent<FloorLevelEstimator>(); // フロアレベル推定器のインスタンスを作成
-            _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure, floorEstimationParameters); // フロアレベル推定器の初期化
+            case AppState.DirectionInput:
+                OnDirectionInput();
+                break;
         }
     }
+
+    // フロアが選択されたときに実行するメソッド
+    private void OnFloorSelected()
+    {
+        if (_floorSelector.isFloorLevelSet == false) return;
+
+        userPositionConfirmButton.interactable = true;
+        _positionInputHandler = gameObject.AddComponent<PositionInputHandler>();
+        _positionInputHandler.Initialize(_userManager, userPositionConfirmButton);
+
+        _appState = AppState.PositionInput;
+
+    }
+
+    // ユーザーの初期位置が確定されたときに実行するメソッド
+    private void OnPositionInput()
+    {
+        if (_positionInputHandler is null || _positionInputHandler.isPositionSet == false) return;
+
+        userDirectionSetButton.interactable = true;
+        Vector3 userPosition = _positionInputHandler.userPosition;
+        _directionInputHandler = gameObject.AddComponent<DirectionInputHandler>();
+        _directionInputHandler.Initialize(_userManager, userDirectionSetButton, userPosition);
+
+        _appState = AppState.DirectionInput;
+
+    }
+
+    // ユーザーの初期方向が確定されたときに実行するメソッド
+    private void OnDirectionInput()
+    {
+        if (_directionInputHandler is null || _directionInputHandler.isDirectionSet == false) return;
+
+        floorLevelDropdown.interactable = false;
+        userTrajectoryToggle.gameObject.SetActive(true);
+
+        float userDirectionYaw = _directionInputHandler.userDirectionYaw;
+        Vector3 userPosition = _positionInputHandler.userPosition;
+
+        _pdrManager = gameObject.AddComponent<PDRManager>();
+        _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParameters);
+
+        int floorLevel = _floorSelector.selectedFloorLevel;
+        float floorLevelPressure = _floorSelector.selectedFloorLevelPressure;
+
+        _floorLevelEstimator = gameObject.AddComponent<FloorLevelEstimator>();
+        _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure, floorEstimationParameters);
+
+        _appState = AppState.PDRStarting;
+
+    }
+
+
+    
+    
 }
