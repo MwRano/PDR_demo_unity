@@ -64,8 +64,7 @@ public class AppController : MonoBehaviour
         _floorLevelManager = gameObject.AddComponent<FloorLevelManager>();
         _floorLevelManager.Initialize(floorLevelText, floorMapParent); // フロアレベルマネージャーの初期化
 
-        _floorSelector = gameObject.AddComponent<FloorSelector>();
-        _floorSelector.Initialize(floorLevelDropdown, _floorLevelManager); // フロアセレクターの初期化
+        _floorSelector = new FloorSelector(floorLevelDropdown, _floorLevelManager);  
 
         userPositionConfirmButton.interactable = false; // 初期位置確認ボタンを無効化
         userDirectionSetButton.interactable = false; // 初期向き設定ボタンを無効化

@@ -2,7 +2,10 @@ using UnityEngine;
 using TMPro; 
 using UnityEngine.InputSystem;
 
-public class FloorSelector : MonoBehaviour
+/// <summary>
+/// フロアを選択時の処理をするクラス
+/// </summary>
+public class FloorSelector
 {
     public float selectedFloorLevelPressure; // 選択されたフロアレベルの気圧;
     public int selectedFloorLevel;// 選択されたフロアレベル
@@ -11,7 +14,8 @@ public class FloorSelector : MonoBehaviour
     TMP_Dropdown _floorLevelDropdown;
     FloorLevelManager _floorLevelManager;
 
-    public void Initialize(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
+
+    public FloorSelector(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
     {
         isFloorLevelSet = false; // 初期値を設定
         _floorLevelDropdown = floorLevelDropdown;
@@ -27,7 +31,7 @@ public class FloorSelector : MonoBehaviour
         }
 
         InputSystem.EnableDevice(PressureSensor.current);
-        
+
     }
 
     void OnFloorSelected(int floorIndex)
@@ -50,7 +54,7 @@ public class FloorSelector : MonoBehaviour
             //selectedFloorLevelPressure = 1000f;
             return;
         }
-        
+
         selectedFloorLevelPressure = PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }
