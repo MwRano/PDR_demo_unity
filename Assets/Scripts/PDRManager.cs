@@ -15,14 +15,14 @@ public class PDRManager : MonoBehaviour
     Vector3 _lastAcceleration;
     Vector3 _userPosition;
 
-    public void Initialize(UserManager userManager, float userDirectionYaw, Vector3 userPosition, PDRParameters pdrParameters)
+    public void Initialize(UserManager userManager, float userDirectionYaw, Vector3 userPosition, PDRParams pdrParams)
     {
         Input.gyro.enabled = true;
 
         // パラメータの初期化
-        _stepLength = pdrParameters.stepLength; // ステップの長さを設定
-        _stepThreshold = pdrParameters.stepThreshold; // ステップ検出の閾値を設定
-        _rotationSpeedFactor = pdrParameters.rotationSpeedFactor; // ジャイロの回転速度にかける係数を設定
+        _stepLength = pdrParams.stepLength; // ステップの長さを設定
+        _stepThreshold = pdrParams.stepThreshold; // ステップ検出の閾値を設定
+        _rotationSpeedFactor = pdrParams.rotationSpeedFactor; // ジャイロの回転速度にかける係数を設定
 
         _userManager = userManager;
         _cumulativeYaw = userDirectionYaw; // 初期向きを設定

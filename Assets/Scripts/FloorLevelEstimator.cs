@@ -15,14 +15,22 @@ public class FloorLevelEstimator : MonoBehaviour
     private float _currentFloorPressure;
     private bool _initFlag = false; // 初期化フラグ
 
-    public void Initialize(FloorLevelManager floorLevelManager, int floorLevel, float floorPressure, FloorEstimationParameters floorEstimationParameters)  
+    public void Initialize(FloorLevelManager floorLevelManager, int floorLevel, float floorPressure, FloorEstimationParams floorEstimationParams)  
     {
         _floorLevelManager = floorLevelManager;
         _currentFloorLevel = floorLevel;
         _currentFloorPressure = floorPressure; 
-        _pressureThreshold = floorEstimationParameters.floorLevelPressureThreshold;
-        InputSystem.EnableDevice(PressureSensor.current);
+        _pressureThreshold = floorEstimationParams.floorLevelPressureThreshold;
         _initFlag = true; // 初期化フラグを立てる
+
+        //  sensorがないときの例外処理
+        if (PressureSensor.current is null)
+        {
+            Debug.LogWarning("気圧センサを有効化しようとしましたが、デバイスの気圧センサを認識できません。");
+            return;
+        }
+        InputSystem.EnableDevice(PressureSensor.current);
+        
     }
 
 
@@ -55,7 +63,13 @@ public class FloorLevelEstimator : MonoBehaviour
 
     float ReadPressureSensorValue()
     {
-        // return 1000f; // 仮の値を返す。実際にはセンサーからの値を取得する必要がある。
+        //  sensorがないときの例外処理
+        if (PressureSensor.current is null)
+        {
+            Debug.LogWarning("気圧センサ値を取得しようとしましたが、デバイスの気圧センサを認識できません。仮のセンサ値を返します");
+            return 1000f;
+        }
+
         return PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }

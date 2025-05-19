@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bafddc7c7035a3a47bc8f99ca828a113, type: 3}
-  m_Name: FloorEstimationParameters
+  m_Name: FloorEstimationParams
   m_EditorClassIdentifier: 
   floorLevelPressureThreshold: 0.41

@@ -2,24 +2,36 @@ using UnityEngine;
 using TMPro; 
 using UnityEngine.InputSystem;
 
-public class FloorSelector : MonoBehaviour
+/// <summary>
+/// フロアを選択時の処理をするクラス
+/// </summary>
+public class FloorSelector
 {
-    // AppControllerからこれらの変数とる
-    public float selectedFloorLevelPressure{get; set;} // 選択されたフロアレベルの気圧;
-    public int selectedFloorLevel{get; set;} // 選択されたフロアレベル
-    public bool isFloorLevelSet{get; set;}// フロアレベルが設定されたかどうか
+    public float selectedFloorLevelPressure; // 選択されたフロアレベルの気圧;
+    public int selectedFloorLevel;// 選択されたフロアレベル
+    public bool isFloorLevelSet;// フロアレベルが設定されたかどうか
 
     TMP_Dropdown _floorLevelDropdown;
     FloorLevelManager _floorLevelManager;
 
-    public void Initialize(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
+
+    public FloorSelector(TMP_Dropdown floorLevelDropdown, FloorLevelManager floorLevelManager)
     {
         isFloorLevelSet = false; // 初期値を設定
         _floorLevelDropdown = floorLevelDropdown;
         _floorLevelManager = floorLevelManager;
 
         _floorLevelDropdown.onValueChanged.AddListener(OnFloorSelected);
+
+        //  sensorがないときの例外処理
+        if (PressureSensor.current is null)
+        {
+            Debug.LogWarning("気圧センサを有効化しようとしましたが、デバイスの気圧センサを認識できません。");
+            return;
+        }
+
         InputSystem.EnableDevice(PressureSensor.current);
+
     }
 
     void OnFloorSelected(int floorIndex)
@@ -35,7 +47,14 @@ public class FloorSelector : MonoBehaviour
 
     void UpdateSelectedFloorLevelPressure()
     {
-        //selectedFloorLevelPressure = 1000f;
+        //  sensorがないときの例外処理
+        if (PressureSensor.current is null)
+        {
+            Debug.LogWarning("気圧センサ値を取得しようとしましたが、デバイスの気圧センサを認識できません。");
+            //selectedFloorLevelPressure = 1000f;
+            return;
+        }
+
         selectedFloorLevelPressure = PressureSensor.current.atmosphericPressure.ReadValue();
     }
 }
