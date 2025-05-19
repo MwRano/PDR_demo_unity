@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b52ea56fd5743d4a0c22e23ea8f2b0, type: 3}
+  m_Name: FloorMapParam
+  m_EditorClassIdentifier: 
+  floorMapDataList:
+  - floorId: 9
+    floorSprite: {fileID: 2409999409478918202, guid: 813d4d5c97d3e244da32f877b2760d03, type: 3}
+  - floorId: 8
+    floorSprite: {fileID: 3313047555751536507, guid: f0c228f290966994a8cfad966ac6a9b1, type: 3}
+  - floorId: 7
+    floorSprite: {fileID: -8162159861810253590, guid: 13cc23e782cbeec45897b2ceb34e5198, type: 3}
+  - floorId: 6
+    floorSprite: {fileID: 8571971903867585697, guid: 60cdad6b8ec81514baefffbd691a8b64, type: 3}
