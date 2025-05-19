@@ -55,7 +55,7 @@ public class AppController : MonoBehaviour
 
     void Start()
     {
-        _floorMapGenerator = new FloorMapGenerator(floorMapParam.floorMapDataList);
+        _floorMapGenerator = new FloorMapGenerator(floorMapParam);
         GameObject floorMapParent = _floorMapGenerator.GenerateFloorMap();
 
         _userManager = gameObject.AddComponent<UserManager>();
