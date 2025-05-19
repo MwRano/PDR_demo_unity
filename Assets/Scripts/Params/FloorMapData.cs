@@ -7,6 +7,6 @@ using UnityEngine;
 [Serializable]
 public class FloorMapData
 {
-    [SerializeField] int floorId;
-    [SerializeField] Sprite floorSprite;
+    public int floorId;
+    public Sprite floorSprite;
 }
