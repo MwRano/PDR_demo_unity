@@ -15,12 +15,12 @@ public class FloorLevelEstimator : MonoBehaviour
     private float _currentFloorPressure;
     private bool _initFlag = false; // 初期化フラグ
 
-    public void Initialize(FloorLevelManager floorLevelManager, int floorLevel, float floorPressure, FloorEstimationParameters floorEstimationParameters)  
+    public void Initialize(FloorLevelManager floorLevelManager, int floorLevel, float floorPressure, FloorEstimationParams floorEstimationParams)  
     {
         _floorLevelManager = floorLevelManager;
         _currentFloorLevel = floorLevel;
         _currentFloorPressure = floorPressure; 
-        _pressureThreshold = floorEstimationParameters.floorLevelPressureThreshold;
+        _pressureThreshold = floorEstimationParams.floorLevelPressureThreshold;
         _initFlag = true; // 初期化フラグを立てる
 
         //  sensorがないときの例外処理

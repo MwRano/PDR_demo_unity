@@ -14,7 +14,7 @@ public class FloorMapGenerator
     private string _floorMapParentName = "FloorMaps";
 
 
-    public FloorMapGenerator(FloorMapParam floorMapParam)
+    public FloorMapGenerator(FloorMapParams floorMapParam)
     {
         _floorMapScale = floorMapParam.floorMapScale;
         _floorMapDataList = floorMapParam.floorMapDataList;

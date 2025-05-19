@@ -19,9 +19,9 @@ public class AppController : MonoBehaviour
     private AppState _appState = AppState.FloorSelection;
 
     [Header("Parameters")]
-    [SerializeField] PDRParameters pdrParameters; // PDRのパラメータ
-    [SerializeField] FloorEstimationParameters floorEstimationParameters; // フロア推定のパラメータ
-    [SerializeField] FloorMapParam floorMapParam; // フロアマップのパラメータ
+    [SerializeField] PDRParams pdrParams; // PDRのパラメータ
+    [SerializeField] FloorEstimationParams floorEstimationParams; // フロア推定のパラメータ
+    [SerializeField] FloorMapParams floorMapParams; // フロアマップのパラメータ
 
     [Header("Floor Selector")]
     [SerializeField] TMP_Dropdown floorLevelDropdown; // フロアレベル選択用のドロップダウン
@@ -55,7 +55,7 @@ public class AppController : MonoBehaviour
 
     void Start()
     {
-        _floorMapGenerator = new FloorMapGenerator(floorMapParam);
+        _floorMapGenerator = new FloorMapGenerator(floorMapParams);
         GameObject floorMapParent = _floorMapGenerator.GenerateFloorMap();
 
         _userManager = gameObject.AddComponent<UserManager>();
@@ -131,13 +131,13 @@ public class AppController : MonoBehaviour
         Vector3 userPosition = _positionInputHandler.userPosition;
 
         _pdrManager = gameObject.AddComponent<PDRManager>();
-        _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParameters);
+        _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParams);
 
         int floorLevel = _floorSelector.selectedFloorLevel;
         float floorLevelPressure = _floorSelector.selectedFloorLevelPressure;
 
         _floorLevelEstimator = gameObject.AddComponent<FloorLevelEstimator>();
-        _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure, floorEstimationParameters);
+        _floorLevelEstimator.Initialize(_floorLevelManager, floorLevel, floorLevelPressure, floorEstimationParams);
 
         _appState = AppState.PDRStarting;
 
