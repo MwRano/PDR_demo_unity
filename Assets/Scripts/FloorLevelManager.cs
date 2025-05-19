@@ -26,8 +26,8 @@ public class FloorLevelManager : MonoBehaviour
             Transform child = _floorMaps.transform.GetChild(i);
             child.gameObject.SetActive(false); // すべてのフロアマップを非表示にする 
 
-            string floorTag = $"FLOOR{floorLevel}";
-            if(child.gameObject.CompareTag(floorTag)){
+            string floorMapName = $"FLOOR{floorLevel}";
+            if(child.gameObject.name == floorMapName){
                 child.gameObject.SetActive(true);
             }
 
