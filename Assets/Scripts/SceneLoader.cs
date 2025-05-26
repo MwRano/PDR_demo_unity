@@ -20,6 +20,6 @@ public class SceneLoader : MonoBehaviour
 
     public void OnRestartButtonClicked()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("AppScene");
     }
 }
