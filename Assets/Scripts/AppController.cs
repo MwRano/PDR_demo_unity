@@ -33,7 +33,6 @@ public class AppController : MonoBehaviour
     [SerializeField] Button userDirectionSetButton; // 初期向き設定ボタン
 
     [Header("User Manager")]
-    [SerializeField] Transform userTransform; // UIマネージャーのプレハブ
     [SerializeField] TMP_Text userPositionText; // ユーザーの位置を表示するテキスト
     [SerializeField] TMP_Text userRotationText; // ユーザーの向きを表示するテキスト
 
@@ -52,6 +51,8 @@ public class AppController : MonoBehaviour
     DirectionInputHandler _directionInputHandler; // 方向入力ハンドラーのインスタンス
     PDRManager _pdrManager; // PDRマネージャーのインスタンス
     FloorLevelEstimator _floorLevelEstimator; // フロアレベル推定器のインスタンス
+    RoadSegmentCluster _roadSegmentCluster;
+    MapMatching _mapMatching;
 
 
     void Start()
@@ -62,17 +63,25 @@ public class AppController : MonoBehaviour
         // _userManager = gameObject.AddComponent<UserManager>();
         // _userManager.Initialize(userTransform, userPositionText, userRotationText); // ユーザーマネージャーの初期化
 
-        _userManager = new UserManager(userTransform, userPositionText, userRotationText);
+        _roadSegmentCluster = new RoadSegmentCluster(); 
+        _mapMatching = new MapMatching(_roadSegmentCluster);
+
+
+        _userManager = userObject.AddComponent<UserManager>();
+        _userManager.Initialize(userPositionText, userRotationText, _roadSegmentCluster, _mapMatching);
 
         _floorLevelManager = gameObject.AddComponent<FloorLevelManager>();
-        _floorLevelManager.Initialize(floorLevelText, floorMapParent); // フロアレベルマネージャーの初期化
+        
+        _floorLevelManager.Initialize(floorLevelText, floorMapParent, _roadSegmentCluster); // フロアレベルマネージャーの初期化
 
-        _floorSelector = new FloorSelector(floorLevelDropdown, _floorLevelManager);  
+        _floorSelector = new FloorSelector(floorLevelDropdown, _floorLevelManager);
 
         userPositionConfirmButton.interactable = false; // 初期位置確認ボタンを無効化
         userDirectionSetButton.interactable = false; // 初期向き設定ボタンを無効化
 
         userTrajectoryToggle.gameObject.SetActive(false); // ユーザーの軌跡トグルを非表示
+
+
 
     }
 
@@ -134,7 +143,7 @@ public class AppController : MonoBehaviour
         Vector3 userPosition = _positionInputHandler.userPosition;
 
         _pdrManager = gameObject.AddComponent<PDRManager>();
-        _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParams);
+        _pdrManager.Initialize(_userManager, userDirectionYaw, userPosition, pdrParams, _mapMatching);
 
         int floorLevel = _floorSelector.selectedFloorLevel;
         float floorLevelPressure = _floorSelector.selectedFloorLevelPressure;
