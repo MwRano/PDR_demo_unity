@@ -10,10 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5460715537691062847}
   - component: {fileID: 6609556244419984391}
-  - component: {fileID: 5288555329670987780}
-  - component: {fileID: 5228355989346861372}
   m_Layer: 0
-  m_Name: FLOOR9
+  m_Name: FLOOR8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +31,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7968819900915992183}
-  - {fileID: 4283029740722949323}
   - {fileID: 3523943187528285314}
   - {fileID: 1648054673503615048}
   - {fileID: 5550263296778822484}
@@ -85,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2409999409478918202, guid: 813d4d5c97d3e244da32f877b2760d03, type: 3}
+  m_Sprite: {fileID: 3313047555751536507, guid: f0c228f290966994a8cfad966ac6a9b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,170 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &5288555329670987780
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339629390205165602}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!66 &5228355989346861372
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1339629390205165602}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 4573170344111543637}
-    m_ColliderPaths:
-    - - X: -64144996
-        Y: 7479999
-      - X: -64195000
-        Y: 7479999
-      - X: -64195000
-        Y: -8220003
-      - X: -64144996
-        Y: -8220003
-  - m_Collider: {fileID: 1357934346656145878}
-    m_ColliderPaths:
-    - - X: -41560000
-        Y: -8005000
-      - X: -64260004
-        Y: -8005000
-      - X: -64260004
-        Y: -8054999
-      - X: -41560000
-        Y: -8054999
-  - m_Collider: {fileID: 914019056384774680}
-    m_ColliderPaths:
-    - - X: -41535000
-        Y: -7650000
-      - X: -41585000
-        Y: -7650000
-      - X: -41585000
-        Y: -23350002
-      - X: -41535000
-        Y: -23350002
-  - m_Collider: {fileID: 7254812755656937033}
-    m_ColliderPaths:
-    - - X: -64144996
-        Y: -7650000
-      - X: -64195000
-        Y: -7650000
-      - X: -64195000
-        Y: -23350002
-      - X: -64144996
-        Y: -23350002
-  - m_Collider: {fileID: 1823875815876825503}
-    m_ColliderPaths:
-    - - X: -33590000
-        Y: -12145000
-      - X: -41490000
-        Y: -12145000
-      - X: -41490000
-        Y: -12195001
-      - X: -33590000
-        Y: -12195001
-  - m_Collider: {fileID: 6142464718809733038}
-    m_ColliderPaths:
-    - - X: -41535000
-        Y: 7580002
-      - X: -41585000
-        Y: 7580002
-      - X: -41585000
-        Y: -8120001
-      - X: -41535000
-        Y: -8120001
-  - m_Collider: {fileID: 5133775603374041962}
-    m_ColliderPaths:
-    - - X: -41560000
-        Y: 7575001
-      - X: -64260004
-        Y: 7575001
-      - X: -64260004
-        Y: 7525001
-      - X: -41560000
-        Y: 7525001
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -6.414529, y: -2.3350003}
-      - {x: -6.4144707, y: -0.8054999}
-      - {x: -4.1585, y: -0.8055293}
-      - {x: -4.1584706, y: -2.3350003}
-      - {x: -4.1535, y: -2.3349707}
-      - {x: -4.153529, y: 0.7580002}
-      - {x: -6.4260006, y: 0.7574708}
-      - {x: -6.4259715, y: 0.7525001}
-      - {x: -4.1585, y: 0.75247073}
-      - {x: -4.1585298, y: -0.80050004}
-      - {x: -6.4144998, y: -0.8004706}
-      - {x: -6.414529, y: 0.7479999}
-      - {x: -6.4195, y: 0.7479706}
-      - {x: -6.4195294, y: -0.80050004}
-      - {x: -6.4260006, y: -0.8005293}
-      - {x: -6.4259715, y: -0.8054999}
-      - {x: -6.4195, y: -0.8055293}
-      - {x: -6.419471, y: -2.3350003}
-    - - {x: -3.3590293, y: -1.2195001}
-      - {x: -3.3590293, y: -1.2145001}
-      - {x: -4.149, y: -1.2145293}
-      - {x: -4.148971, y: -1.2195001}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
-  m_UseDelaunayMesh: 0
-  m_CompositeGameObject: {fileID: 1339629390205165602}
 --- !u!1001 &1794460113571541762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268,14 +101,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460715537691062847}
     m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_Name
       value: RoadSegment (3)
@@ -338,11 +163,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
   m_PrefabInstance: {fileID: 1794460113571541762}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &7254812755656937033 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 1794460113571541762}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2987888944678988517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -351,21 +171,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460715537691062847}
     m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_Name
       value: RoadSegment (5)
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.57
+      value: 1.31
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalScale.y
@@ -377,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.027
+      value: -0.091
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -416,11 +228,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
---- !u!61 &6142464718809733038 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 2987888944678988517}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8977452872555985587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
@@ -434,14 +241,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460715537691062847}
     m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_Name
       value: RoadSegment
@@ -460,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.755
+      value: 0.568
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -499,11 +298,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
---- !u!61 &5133775603374041962 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 4285073349849339425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7968819900915992183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
@@ -517,21 +311,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460715537691062847}
     m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_Name
       value: RoadSegment (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.57
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalScale.y
@@ -543,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.037
+      value: -0.069
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -587,11 +373,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
   m_PrefabInstance: {fileID: 4845411434230769694}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &4573170344111543637 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 4845411434230769694}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7279720596495002836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -600,14 +381,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460715537691062847}
     m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_Name
       value: RoadSegment (6)
@@ -622,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.754
+      value: -3.759
       objectReference: {fileID: 0}
     - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -665,98 +438,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
---- !u!61 &1823875815876825503 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 7279720596495002836}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3523943187528285314 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
   m_PrefabInstance: {fileID: 7279720596495002836}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7967197747941186717
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 5460715537691062847}
-    m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Name
-      value: RoadSegment (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.291
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.803
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
---- !u!61 &1357934346656145878 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 7967197747941186717}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4283029740722949323 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 7967197747941186717}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8135270354910113619
 PrefabInstance:
@@ -766,14 +451,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5460715537691062847}
     m_Modifications:
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-      propertyPath: m_CompositeOperation
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6181252793783929476, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
       propertyPath: m_Name
       value: RoadSegment (4)
@@ -831,11 +508,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
---- !u!61 &914019056384774680 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: -267552736102417077, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
-  m_PrefabInstance: {fileID: 8135270354910113619}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2668107564679757573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6188311993559683158, guid: e27f221459fcb42ebbb0248fa16ff34a, type: 3}
