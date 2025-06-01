@@ -26,23 +26,19 @@ public class FloorMapGenerator
         GameObject floorMapParent = new GameObject(_floorMapParentName);
         foreach (var floorMapData in _floorMapDataList)
         {
-            GameObject floorMapChild = new GameObject();
-            InitFloorMapChild(floorMapData.floorId, floorMapData.floorSprite, floorMapChild, floorMapParent);
+            InitFloorMapChild(floorMapData.floorId, floorMapData.floorObject, floorMapParent);
         }
 
         return floorMapParent;
     }
 
     //  フロアマップの初期化（名前、スケール、スプライト）するメソッド
-    private void InitFloorMapChild(int floorId, Sprite floorSprite, GameObject floorMapChild, GameObject floorMapParent)
+    private void InitFloorMapChild(int floorId, GameObject floorObjectPrefab, GameObject floorMapParent)
     {
-        floorMapChild.name = $"FLOOR{floorId}";
-        floorMapChild.transform.localScale *= _floorMapScale;
-
-        SpriteRenderer floorMapChildSpriteRenderer = floorMapChild.AddComponent<SpriteRenderer>();
-        floorMapChildSpriteRenderer.sprite = floorSprite;
-
-        floorMapChild.transform.parent = floorMapParent.transform;
+        GameObject floorObject = GameObject.Instantiate(floorObjectPrefab, floorMapParent.transform);
+        floorObject.name = $"FLOOR{floorId}";
+        floorObject.transform.localScale *= _floorMapScale;
+        //floorObject.transform.parent = floorMapParent.transform;
     }
 
     

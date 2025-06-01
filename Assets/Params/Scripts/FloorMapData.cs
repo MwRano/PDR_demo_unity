@@ -8,5 +8,5 @@ using UnityEngine;
 public class FloorMapData
 {
     public int floorId;
-    public Sprite floorSprite;
+    public GameObject floorObject;
 }

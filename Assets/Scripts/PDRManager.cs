@@ -14,8 +14,15 @@ public class PDRManager : MonoBehaviour
     float _cumulativeYaw; // Z軸回りの累積回転角度
     Vector3 _lastAcceleration;
     Vector3 _userPosition;
+    MapMatching _mapMatching;
 
-    public void Initialize(UserManager userManager, float userDirectionYaw, Vector3 userPosition, PDRParams pdrParams)
+    public void Initialize
+    (
+        UserManager userManager,
+        float userDirectionYaw,
+        Vector3 userPosition,
+        PDRParams pdrParams,
+        MapMatching mapMatching)
     {
         Input.gyro.enabled = true;
 
@@ -28,6 +35,7 @@ public class PDRManager : MonoBehaviour
         _cumulativeYaw = userDirectionYaw; // 初期向きを設定
         _userPosition = userPosition; // ユーザーの初期位置を設定
         _lastAcceleration = Input.acceleration;
+        _mapMatching = mapMatching;
     }
 
     void Update()
@@ -63,6 +71,14 @@ public class PDRManager : MonoBehaviour
     {
         Vector3 forward = new Vector3(Mathf.Cos(_cumulativeYaw), Mathf.Sin(_cumulativeYaw), 0).normalized;
         _userPosition += forward * _stepLength;
+
+        Collider2D hitCollider = Physics2D.OverlapPoint(_userPosition);
+        if (hitCollider != null)
+        {
+            Debug.Log("collider is not null");
+            Vector3 correctionPosition = _mapMatching.MatchUserToMap(_userPosition);
+            _userPosition = correctionPosition;
+        }
         _userManager.UpdateUserPosition(_userPosition); // ユーザーマネージャーに位置を更新
     }
 
