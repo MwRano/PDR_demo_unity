@@ -2,39 +2,46 @@
 
 using UnityEngine;
 using TMPro;
-
+using System.Linq;
 /// <summary>
 /// ユーザーの状態を管理するクラス
 /// </summary>
-public class UserManager
+public class UserManager : MonoBehaviour
 {
     TMP_Text _userPositionText; // ユーザーの位置を表示するテキスト
     TMP_Text _userRotationText; // ユーザーの向きを表示するテキスト
-    Transform _userTransform;
+    RoadSegmentCluster _roadSegmentCluster;
+    MapMatching _mapMatching;
 
-    public UserManager(Transform userTransform, TMP_Text positionText, TMP_Text rotationText)
+    public void Initialize(
+        TMP_Text positionText,
+        TMP_Text rotationText,
+        RoadSegmentCluster roadSegmentCluster,
+        MapMatching mapMatching)
     {
-        _userTransform = userTransform;
         _userPositionText = positionText;
         _userRotationText = rotationText;
+        _roadSegmentCluster = roadSegmentCluster;
+        _mapMatching = mapMatching;
     }
 
     public void UpdateUserPosition(Vector3 position)
     {
-        _userTransform.position = position;
-        _userPositionText.text = $"User Position: {position.x:F2}, {position.y:F2}"; // 位置を表示
-        AddVertexToLineRenderer(position);
+        Debug.Log($"ユーザーの位置 : {position}");
+        transform.position = position;
+        _userPositionText.text = $"User Position: {transform.position.x:F2}, {transform.position.y:F2}"; // 位置を表示
+        AddVertexToLineRenderer(transform.position);
     }
 
     public void UpdateUserDirection(float cumulativeYaw)
     {
-        _userTransform.rotation = Quaternion.Euler(0, 0, cumulativeYaw * Mathf.Rad2Deg - 90); // 回転量を計算
+        transform.rotation = Quaternion.Euler(0, 0, cumulativeYaw * Mathf.Rad2Deg - 90); // 回転量を計算
         _userRotationText.text = $"Heading: {cumulativeYaw * Mathf.Rad2Deg:F2}°"; // ラジアンを度に変換して表示
     }
 
     void AddVertexToLineRenderer(Vector3 position)
     {
-        if(_userTransform.gameObject.TryGetComponent<LineRenderer>(out var lineRenderer))
+        if (TryGetComponent<LineRenderer>(out var lineRenderer))
         {
             // 頂点を追加する
             int vertexCount = lineRenderer.positionCount;
@@ -45,8 +52,22 @@ public class UserManager
             Debug.Log($"Added vertex at: {linerendeerPosition}"); // デバッグログに追加した頂点を表示
         }
 
-        
+
     }
+
+    // void OnTriggerExit2D(Collider2D collider)
+    // {
+    //     Debug.Log("歩行空間ネットワークからはみ出たよ");
+    //     bool isCollisionWithRoadSegment = _roadSegmentCluster.RoadSegments
+    //        .Any(roadSegment => roadSegment.gameObject == collider.gameObject);
+
+    //     if (isCollisionWithRoadSegment)
+    //     {
+    //         Vector3 userPosition = _mapMatching.MatchUserToMap(transform);
+    //         UpdateUserPosition(userPosition);
+    //     }
+
+    // }
 
 
 }
