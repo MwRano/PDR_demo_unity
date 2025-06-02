@@ -1,24 +1,23 @@
+#nullable enable
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using VContainer;
 
+/// <summary>
+/// ユーザーの移動軌跡を扱うクラス
+/// </summary>
 public class UserTrajectHandler
 {
-    private GameObject _userObject;
+    private UserMono _userMono;
 
-    public UserTrajectHandler(Toggle userTrajectoryToggle, GameObject userObject)
+    [Inject]
+    public UserTrajectHandler(
+        UserMono userMono)
     {
-        if (userTrajectoryToggle == null)
-        {
-            Debug.LogError("UserTrajectoryToggle is not assigned in the inspector.");
-            return;
-        }
-
-        userTrajectoryToggle.onValueChanged.AddListener(OnToggleChanged);
-        _userObject = userObject;
+        _userMono = userMono;
     }
 
-    
+    // 軌跡トグルの変化に応じた処理を行うメソッド
     public void OnToggleChanged(bool isTrajectOn)
     {
         if (isTrajectOn)
@@ -27,14 +26,14 @@ public class UserTrajectHandler
             return;
         }
 
-        GameObject.Destroy(_userObject.GetComponent<LineRenderer>()); // ユーザーマネージャーからLineRendererを削除
-        
+        // 軌跡の無効化(＝LineRendererの削除)
+        GameObject.Destroy(_userMono.GetComponent<LineRenderer>());
     }
 
+    // LineRendererの初期化を行うメソッド
     void InitializeLineRenderer()
     {
-        Debug.Log("LineRendererをアタッチ");
-        LineRenderer lineRenderer = _userObject.AddComponent<LineRenderer>();
+        LineRenderer lineRenderer = _userMono.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.1f; // 線の太さを設定
         lineRenderer.endWidth = 0.1f; // 線の太さを設定
         lineRenderer.startColor = Color.red; // 線の色を設定
@@ -42,5 +41,4 @@ public class UserTrajectHandler
         lineRenderer.positionCount = 0; // 頂点数を初期化
         lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // マテリアルを設定
     }
-
 }
