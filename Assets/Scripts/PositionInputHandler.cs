@@ -1,74 +1,46 @@
+#nullable enable
 using UnityEngine;
-using TMPro; // TextMeshProを使用するための名前空間
-using UnityEngine.UI;
+using VContainer;
 
-public class PositionInputHandler : MonoBehaviour
+/// <summary>
+/// ユーザーの位置を指定する入力を扱うクラス
+/// </summary>
+public class PositionInputHandler
 {
-    public Vector3 userPosition{ get; set; } // ユーザーの位置
-    public bool isPositionSet{ get; set;} // ユーザーの位置が設定されたかどうか
-
-    UserManager _userManager; // ユーザーマネージャーの参照
-    Button _userPositionConfirmButton; // ボタンの参照
+    public Vector3 UserPosition { get; set; } // ユーザーの位置
+    private UserMono _userMono;
 
     Vector2 _touchStartPosition; // タッチ開始位置
     Vector2 _userStartPosition; // ユーザーの初期位置
     float _swipeSpeed = 0.01f; // スワイプの速度
 
-    public void Initialize(UserManager userManager, Button userPositionConfirmButton)
+    [Inject]
+    public PositionInputHandler(UserMono userMono)
     {
-        isPositionSet = false; // 初期値を設定
-        _userManager = userManager;
-        _userPositionConfirmButton = userPositionConfirmButton;
-        _userPositionConfirmButton.onClick.AddListener(OnConfirmButtonClicked); // ボタンがクリックされたときにUpdateInitialPositionメソッドを呼び出す
+        _userMono = userMono;
+        UserPosition = new Vector3(0, 0, 0);
     }
 
-    void Update()
+    // ユーザーの初期位置を更新するメソッド
+    public void UpdateInitialPosition()
     {
-        // タッチが検出された場合、初期位置を更新
-        if (Input.touchCount > 0 && Input.mousePosition.y < 1780f)
+        // 画面入力範囲の設定
+        if (Input.touchCount <= 0 || Input.mousePosition.y >= 1780f) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
-            UpdateInitialPosition();
-        }
-    }
-
-    // void UpdateInitialPosition()
-    // {
-    //     Vector3 screenPosition = Input.mousePosition;
-    //     Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, Camera.main.nearClipPlane));
-    //     worldPosition.z = 0;
-
-
-
-    //     userPostion = worldPosition; // ユーザーの位置を更新
-    //     _userManager.UpdateUserPosition(userPostion); // ユーザーマネージャーに位置を更新
-    // }
-
-    void UpdateInitialPosition()
-    {
-
-        if (Input.GetMouseButtonDown(0)){
             _touchStartPosition = Input.mousePosition; // タッチ開始位置を取得
-            _userStartPosition = userPosition; // ユーザーの初期位置を取得
+            _userStartPosition = UserPosition; // ユーザーの初期位置を取得
         }
 
-        if(Input.GetMouseButton(0)){
+        if (Input.GetMouseButton(0))
+        {
             Vector2 touchCurrentPosition = Input.mousePosition; // タッチ現在位置を取得
             Vector2 touchDelta = touchCurrentPosition - _touchStartPosition; // タッチの移動量を計算
             Vector2 moveDirection = new Vector2(-touchDelta.x, -touchDelta.y) * _swipeSpeed; // 移動方向を計算
 
-            userPosition = _userStartPosition + moveDirection; // ユーザーの位置を更新  
-            _userManager.UpdateUserPosition(userPosition);
-
+            UserPosition = _userStartPosition + moveDirection;
+            _userMono.UpdateUserPosition(UserPosition);
         }
-
-    }
-
-
-    void OnConfirmButtonClicked()
-    {
-        // ボタンがクリックされたときの処理
-        isPositionSet = true; // ユーザーの位置が設定されたことを示すフラグを立てる
-        _userPositionConfirmButton.interactable = false; // ボタンを無効化
-        this.enabled = false; // スクリプトを無効化して、Updateメソッドを停止
     }
 }
