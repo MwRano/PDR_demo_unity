@@ -15,10 +15,10 @@ MonoBehaviour:
   floorMapScale: 4.869327
   floorMapDataList:
   - floorId: 9
-    floorObject: {fileID: 1339629390205165602, guid: 9b49eb60dfdc14be4b07d94cf7a7cf12, type: 3}
+    floorObj: {fileID: 1339629390205165602, guid: 9b49eb60dfdc14be4b07d94cf7a7cf12, type: 3}
   - floorId: 8
-    floorObject: {fileID: 1339629390205165602, guid: d29118022d0b94b6a8251959ac0d8357, type: 3}
+    floorObj: {fileID: 1339629390205165602, guid: d29118022d0b94b6a8251959ac0d8357, type: 3}
   - floorId: 7
-    floorObject: {fileID: 1339629390205165602, guid: 223095295776645ab962a8cab0fae999, type: 3}
+    floorObj: {fileID: 1339629390205165602, guid: 223095295776645ab962a8cab0fae999, type: 3}
   - floorId: 6
-    floorObject: {fileID: 1339629390205165602, guid: 411ace971eccf4915a3bbe4d8004df25, type: 3}
+    floorObj: {fileID: 1339629390205165602, guid: 411ace971eccf4915a3bbe4d8004df25, type: 3}
