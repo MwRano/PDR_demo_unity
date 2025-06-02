@@ -1,61 +1,50 @@
 # nullable enable
-
 using UnityEngine;
-using UnityEngine.Rendering;
+using VContainer;
 
+/// <summary>
+/// PDRを行うクラス
+/// </summary>
+public class PDRManager
+{   
+    private float _stepLength; // ステップの長さ
+    private float _stepThreshold; // ステップ検出の閾値（加速度の変化量）
+    private float _rotationSpeedFactor; // ジャイロの回転速度にかける係数
 
-public class PDRManager : MonoBehaviour
-{
-    float _stepLength; // ステップの長さ
-    float _stepThreshold; // ステップ検出の閾値（加速度の変化量）
-    float _rotationSpeedFactor; // ジャイロの回転速度にかける係数
+    private UserMono _userMono;
+    private Vector3 _lastAcceleration;
+    private MapMatching _mapMatching;
 
-    UserManager _userManager; // ユーザーマネージャーの参照
-    float _cumulativeYaw; // Z軸回りの累積回転角度
-    Vector3 _lastAcceleration;
-    Vector3 _userPosition;
-    MapMatching _mapMatching;
+    public bool IsMapMatchingOn { get; set; }
 
-    public void Initialize
-    (
-        UserManager userManager,
-        float userDirectionYaw,
-        Vector3 userPosition,
+    [Inject]
+    public PDRManager(
         PDRParams pdrParams,
+        UserMono userMono,
         MapMatching mapMatching)
     {
         Input.gyro.enabled = true;
 
         // パラメータの初期化
-        _stepLength = pdrParams.stepLength; // ステップの長さを設定
-        _stepThreshold = pdrParams.stepThreshold; // ステップ検出の閾値を設定
-        _rotationSpeedFactor = pdrParams.rotationSpeedFactor; // ジャイロの回転速度にかける係数を設定
+        _stepLength = pdrParams.stepLength; 
+        _stepThreshold = pdrParams.stepThreshold;
+        _rotationSpeedFactor = pdrParams.rotationSpeedFactor;
 
-        _userManager = userManager;
-        _cumulativeYaw = userDirectionYaw; // 初期向きを設定
-        _userPosition = userPosition; // ユーザーの初期位置を設定
-        _lastAcceleration = Input.acceleration;
+        _userMono = userMono;
         _mapMatching = mapMatching;
+        _lastAcceleration = Input.acceleration;
+
+        IsMapMatchingOn = false;
     }
 
-    void Update()
-    {
-        UpdateCumulativeYaw();
-
-        if(DetectStep())
-        {
-            UpdatePosition();
-        }
-    }
-
-    bool DetectStep()
+    // ステップの検知を行うメソッド
+    public bool DetectStep()
     {
         bool isStepping = false;
         float accelerationChange = Mathf.Abs(Input.acceleration.magnitude - _lastAcceleration.magnitude);
         if (accelerationChange > _stepThreshold && !isStepping)
         {
             isStepping = true;
-
         }
         else if (accelerationChange < _stepThreshold * 0.5f) // 閾値を下回ったらステップ終了とみなす
         {
@@ -67,25 +56,36 @@ public class PDRManager : MonoBehaviour
         return isStepping;
     }
 
-    void UpdatePosition()
+    // 位置の更新を行うメソッド
+    public void UpdatePosition()
     {
-        Vector3 forward = new Vector3(Mathf.Cos(_cumulativeYaw), Mathf.Sin(_cumulativeYaw), 0).normalized;
-        _userPosition += forward * _stepLength;
+        float cumulativeYaw = _userMono.UserComulativeYaw.Value;
+        Vector3 userPosition = _userMono.UserPosition.Value;
+        Vector3 forward = new Vector3(Mathf.Cos(cumulativeYaw), Mathf.Sin(cumulativeYaw), 0).normalized;
+        userPosition += forward * _stepLength;
 
-        Collider2D hitCollider = Physics2D.OverlapPoint(_userPosition);
-        if (hitCollider != null)
-        {
-            Debug.Log("collider is not null");
-            Vector3 correctionPosition = _mapMatching.MatchUserToMap(_userPosition);
-            _userPosition = correctionPosition;
-        }
-        _userManager.UpdateUserPosition(_userPosition); // ユーザーマネージャーに位置を更新
+        if (IsMapMatchingOn) userPosition = ProcessMapMatching(userPosition);
+        _userMono.UpdateUserPosition(userPosition);
     }
 
-    void UpdateCumulativeYaw()
+    // マップマッチングの処理を行うメソッド
+    private Vector3 ProcessMapMatching(Vector3 userPosition)
     {
-        _cumulativeYaw += Input.gyro.rotationRate.z * Time.deltaTime * _rotationSpeedFactor;
-        Debug.Log($"Input.gyro.rotationRate.z: {Input.gyro.rotationRate.z}"); // デバッグ用ログ
-        _userManager.UpdateUserDirection(_cumulativeYaw); // ユーザーマネージャーに回転を更新
+        Collider2D hitCollider = Physics2D.OverlapPoint(userPosition);
+        if (hitCollider != null)
+        {
+            Vector3 correctionPosition = _mapMatching.MatchUserToMap(userPosition);
+            userPosition = correctionPosition;
+        }
+
+        return userPosition;
+    }
+
+    // 累積のヨー角を計算するメソッド
+    public void UpdateCumulativeYaw()
+    {
+        float cumulativeYaw = _userMono.UserComulativeYaw.Value;
+        cumulativeYaw += Input.gyro.rotationRate.z * Time.deltaTime * _rotationSpeedFactor;
+        _userMono.UpdateUserDirection(cumulativeYaw);
     }
 }

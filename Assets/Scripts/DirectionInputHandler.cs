@@ -1,55 +1,38 @@
 #nullable enable
-
 using UnityEngine;
-using UnityEngine.UI;
+using VContainer;
 
-public class DirectionInputHandler : MonoBehaviour
+/// <summary>
+/// ユーザーの向きを指定する入力を扱うクラス
+/// </summary>
+public class DirectionInputHandler
 {
-    public bool isDirectionSet{ get; set;} // ユーザーの向きが設定されたかどうか
-    
-    public float userDirectionYaw{ get; set;} // ユーザーの向き（ラジアン）
+    private UserMono _userMono;
 
-    UserManager _userManager; // ユーザーマネージャーの参照
-    Button _userDirectionConfirmButton; // ボタンの参照
-    Vector3 _userPosition;
+    public float UserDirectionYaw { get; set; } // ユーザーの向き（ラジアン）
 
-    public void Initialize(UserManager userManager, Button userDirectionConfirmButton, Vector3 userPosition)
+    [Inject]
+    public DirectionInputHandler(
+        UserMono userMono)
     {
-        isDirectionSet = false; // 初期値を設定
-        _userManager = userManager;
-        _userDirectionConfirmButton = userDirectionConfirmButton;
-        _userPosition = userPosition; // ユーザーの位置を設定
-        _userDirectionConfirmButton.onClick.AddListener(OnConfirmButtonClicked); // ボタンがクリックされたときにUpdateInitialDirectionメソッドを呼び出す
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && Input.mousePosition.y < 1780f)
-        {
-            UpdateInitialDirection();
-        }
+        _userMono = userMono;
     }
 
-    void UpdateInitialDirection()
+    // ユーザーの初期方向を更新するメソッド
+    public void UpdateInitialDirection()
     {
+        //画面入力範囲の指定
+        if (!Input.GetMouseButtonDown(0) || Input.mousePosition.y >= 1780f) return;
+
         Vector3 screenPosition = Input.mousePosition;
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, Camera.main.nearClipPlane));
         worldPosition.z = 0;
 
-        Vector3 userDirection = worldPosition - _userPosition; // 初期位置からのベクトルを計算
-        userDirection.Normalize(); // 単位ベクトルに正規化
+        Vector3 userPosition = _userMono.gameObject.transform.position;
+        Vector3 userDirection = worldPosition - userPosition;
+        userDirection.Normalize();
 
-        userDirectionYaw = Mathf.Atan2(userDirection.y, userDirection.x);
-        _userManager.UpdateUserDirection(userDirectionYaw); // ユーザーマネージャーに向きを更新
-
-    }
-
-    void OnConfirmButtonClicked()
-    {
-        // ボタンがクリックされたときの処理
-        isDirectionSet = true; // ユーザーの向きが設定されたことを示すフラグを立てる
-        _userDirectionConfirmButton.interactable = false; // ボタンを無効化
-        this.enabled = false; // スクリプトを無効化して、Updateメソッドを停止
+        UserDirectionYaw = Mathf.Atan2(userDirection.y, userDirection.x);
+        _userMono.UpdateUserDirection(UserDirectionYaw);
     }
 }

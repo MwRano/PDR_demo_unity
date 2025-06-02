@@ -7,6 +7,14 @@ using UnityEngine;
 [Serializable]
 public class FloorMapData
 {
+    public FloorMapData(
+        int floorIdArg,
+        GameObject floorObjArg)
+    {
+        floorId = floorIdArg;
+        floorObj = floorObjArg;   
+    }
+
     public int floorId;
-    public GameObject floorObject;
+    public GameObject floorObj;
 }
