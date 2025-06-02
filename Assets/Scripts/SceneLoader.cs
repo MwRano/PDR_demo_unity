@@ -1,25 +1,14 @@
-using UnityEngine;
+#nullable enable
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class SceneLoader : MonoBehaviour
+/// <summary>
+/// シーンの読み込みを行うクラス
+/// </summary>
+public class SceneLoader
 {
-    void Start()
+    // シーンをリロードするメソッド
+    public void ReloadScene()
     {
-        Button restartButton = gameObject.GetComponent<Button>();
-        
-        if (restartButton != null)
-        {
-            restartButton.onClick.AddListener(OnRestartButtonClicked); // ボタンがクリックされたときにOnRestartButtonClickedメソッドを呼び出す
-        }
-        else
-        {
-            Debug.LogError("Button component not found on the GameObject.");
-        }
-    }
-
-    public void OnRestartButtonClicked()
-    {
-        SceneManager.LoadScene("AppScene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
