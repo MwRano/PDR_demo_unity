@@ -9,6 +9,9 @@ public class PDRParams : ScriptableObject
 
     [Header("Weinberg Stride")]
     public float weinbergK = 0.4f; // Weinberg式の係数
+    public float strideExponent = 0.4f; // 0.5=平方根, 小さくすると変化が穏やか
+    public float peakToPeakMin = 0.05f; // 加速度ピークtoピークの下限
+    public float peakToPeakMax = 3.0f; // 加速度ピークtoピークの上限
     public float minStrideLength = 0.2f; // 歩幅の下限
     public float maxStrideLength = 1.2f; // 歩幅の上限
     public float strideSmoothing = 0.2f; // 0-1で歩幅の平滑化

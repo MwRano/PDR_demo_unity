@@ -11,6 +11,9 @@ public class PDRManager
     private float _stepThreshold; // ステップ検出の閾値（加速度の変化量）
     private float _rotationSpeedFactor; // ジャイロの回転速度にかける係数
     private float _weinbergK; // Weinberg式の係数
+    private float _strideExponent;
+    private float _peakToPeakMin;
+    private float _peakToPeakMax;
     private float _minStrideLength;
     private float _maxStrideLength;
     private float _strideSmoothing;
@@ -43,6 +46,9 @@ public class PDRManager
         _stepThreshold = pdrParams.stepThreshold;
         _rotationSpeedFactor = pdrParams.rotationSpeedFactor;
         _weinbergK = pdrParams.weinbergK;
+        _strideExponent = pdrParams.strideExponent;
+        _peakToPeakMin = pdrParams.peakToPeakMin;
+        _peakToPeakMax = pdrParams.peakToPeakMax;
         _minStrideLength = pdrParams.minStrideLength;
         _maxStrideLength = pdrParams.maxStrideLength;
         _strideSmoothing = pdrParams.strideSmoothing;
@@ -126,7 +132,9 @@ public class PDRManager
 
     private void UpdateStrideLength(float accelPeakToPeak)
     {
-        float peakToPeak = Mathf.Max(accelPeakToPeak, 0.0001f);
+        float minPeakToPeak = _peakToPeakMin > 0f ? _peakToPeakMin : 0.0001f;
+        float maxPeakToPeak = _peakToPeakMax > 0f ? _peakToPeakMax : float.PositiveInfinity;
+        float peakToPeak = Mathf.Clamp(accelPeakToPeak, minPeakToPeak, maxPeakToPeak);
 
         if (_isCalibrating)
         {
@@ -146,7 +154,8 @@ public class PDRManager
             }
         }
 
-        float stride = _weinbergK > 0f ? _weinbergK * Mathf.Sqrt(peakToPeak) : _stepLength;
+        float exponent = _strideExponent > 0f ? _strideExponent : 0.5f;
+        float stride = _weinbergK > 0f ? _weinbergK * Mathf.Pow(peakToPeak, exponent) : _stepLength;
         float minStride = _minStrideLength > 0f ? _minStrideLength : 0f;
         float maxStride = _maxStrideLength > 0f ? _maxStrideLength : float.PositiveInfinity;
         stride = Mathf.Clamp(stride, minStride, maxStride);
