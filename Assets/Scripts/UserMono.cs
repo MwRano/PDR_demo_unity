@@ -11,6 +11,11 @@ public class UserMono : MonoBehaviour
     public ReactiveProperty<Vector3> UserPosition { get; set; } = null!;
     public ReactiveProperty<float> UserComulativeYaw { get; set; } = null!;
 
+    [SerializeField] private float positionSmoothTime = 0.12f;
+    private Vector3 _targetPosition;
+    private Vector3 _positionVelocity;
+    private bool _hasTarget;
+
     [Inject]
     public void Initialize()
     {
@@ -19,11 +24,43 @@ public class UserMono : MonoBehaviour
         Debug.Log(UserPosition);
     }
 
+    private void Update()
+    {
+        if (!_hasTarget)
+        {
+            return;
+        }
+
+        if (positionSmoothTime <= 0f)
+        {
+            transform.position = _targetPosition;
+        }
+        else
+        {
+            transform.position = Vector3.SmoothDamp(
+                transform.position,
+                _targetPosition,
+                ref _positionVelocity,
+                positionSmoothTime);
+        }
+
+        UserPosition.Value = transform.position;
+        UpdateLastVertex(transform.position);
+
+        if ((transform.position - _targetPosition).sqrMagnitude < 0.0001f)
+        {
+            transform.position = _targetPosition;
+            UserPosition.Value = _targetPosition;
+            UpdateLastVertex(_targetPosition);
+            _hasTarget = false;
+        }
+    }
+
     // ユーザーの位置の更新
     public void UpdateUserPosition(Vector3 position)
     {
-        UserPosition.Value = position;
-        transform.position = position;
+        _targetPosition = position;
+        _hasTarget = true;
         AddVertexToLineRenderer(transform.position);
     }
 
@@ -46,6 +83,21 @@ public class UserMono : MonoBehaviour
 
             Vector3 linerendererPosition = new Vector3(position.x, position.y, -1);
             lineRenderer.SetPosition(vertexCount, linerendererPosition);
+        }
+    }
+
+    void UpdateLastVertex(Vector3 position)
+    {
+        if (TryGetComponent<LineRenderer>(out var lineRenderer))
+        {
+            int lastIndex = lineRenderer.positionCount - 1;
+            if (lastIndex < 0)
+            {
+                return;
+            }
+
+            Vector3 linerendererPosition = new Vector3(position.x, position.y, -1);
+            lineRenderer.SetPosition(lastIndex, linerendererPosition);
         }
     }
 }
